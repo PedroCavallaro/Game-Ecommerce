@@ -8,6 +8,7 @@ header{
     justify-content: space-between;
     align-items: center;
     background:  #4c1b6e;
+    height: 6rem;
 
 }
 body{
@@ -48,7 +49,7 @@ header > img{
 }
 .user-section{
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
 }
 .user-section > div{
     display: flex;

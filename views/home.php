@@ -1,6 +1,6 @@
 <?php
 $username = $_GET['username'];
-
+include_once "../src/Product/products.php"
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,40 +16,26 @@ $username = $_GET['username'];
     <header>
         <img  src="../assets/icon_logo.png" alt="">
         <div>
-            <form action="../src/auth.php" method="POST" id="searchContainer" for="">
-                <input type="text">
+            <form action="../src/Product/search.php?username=<?=$username?>" method="POST" id="searchContainer" for="">
+                <input type="text" name="search">
                 <label id="searchLabel" for="search">
                     <img src="../assets/search.png" id="searchImg" alt="" srcset="">
-                    <input id="search" type="submit" value="pesquisar">
+                    <input id="search" type="submit" >
                 </label>
             </form>
         </div>
         <div class="user-section">
             <div>
-                <img class="headerImg" src="../assets/user.png" alt="userIcon">
+                <a href="User/user.php?username=<?=$username?>">
+                    <img class="headerImg" src="../assets/user.png" alt="userIcon">
+                </a>
                 <h2>Olá <?=$username?></h2>
             </div>
             <img class="headerImg" src="../assets/shopcart.png" alt="shopcart" srcset="">
         </div>
     </header>
     <main>
-        <div class="card">
-            <div class="cover">
-                <img  src="../covers/monster-hunter-world.jpeg" alt="">
-            </div>
-            <h3 class="gameTitle">Monster Hunter</h3>
-            <div class="info">
-                <div class="price-info">
-                    <div>
-                        <h3 class="price">Valor</h3>
-                        <h3 class="price">12,5</h3>
-                    </div>
-                    <label for="">
-                        <img class="arrow" src="../assets/arrow-rigth.png" alt="">
-                    </label>
-                </div>
-            </div>
-        </div>
+        <?=getProducts()?>
     </main>
 </body>
 </html>

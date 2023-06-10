@@ -1,0 +1,33 @@
+*{
+    margin:0;
+    padding:0;
+}
+header{
+    background:  #4c1b6e;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header > a > img{
+    height: 3rem;
+    object-fit: cover;
+    cursor: pointer;
+}
+body{
+    background: linear-gradient(to right, #5b0672, #033371);
+}
+.user-hero{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.icon{
+    height: 6rem;
+}
+.previous-buys{
+    margin-left: 1rem;
+}
