@@ -39,7 +39,6 @@ form{
     height: 25rem;
     gap: 2rem;
 }
-/* 6a3678 */
 a{
     margin-left: 9px;
 }
@@ -60,7 +59,7 @@ input[type="text"]{
     outline: none;
 }
 input[type="text"]:focus{
-    outline: #350741;
+    outline: 2px solid #5b0672;
 }
 input[type="submit"]{
     cursor: pointer;

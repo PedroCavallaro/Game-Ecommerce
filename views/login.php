@@ -26,7 +26,7 @@
                         <p>Não tem uma conta? <a id="register" href="./register.php">Cadastre-se</a></p>
                     </p>
                 </div>
-                    <input type="submit" value="entrar">                
+                    <input type="submit" value="Entrar">                
             </form>
             <div></div>
         </section>
