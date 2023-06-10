@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    color: white;
+}
+
+main{
+    display: flex;
+    justify-content:center;
+    flex-direction: row;
+
+}
+section{
+    height: 100dvh;
+}
+.left{
+    width: 50dvw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #02234d, #430555);
+}
+.right{
+    background: linear-gradient(to right, #5b0672, #033371);
+    width: 50dvw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#682b79 ;
+    width: 25rem;
+    height: 25rem;
+    gap: 2rem;
+}
+/* 6a3678 */
+a{
+    margin-left: 9px;
+}
+p{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+img{
+    object-fit: cover;
+    height: 50rem;
+}
+input[type="text"]{
+    color: black;
+    width: 19rem;
+    height: 2rem;
+    outline: none;
+}
+input[type="text"]:focus{
+    outline: #350741;
+}
+input[type="submit"]{
+    cursor: pointer;
+    width: 19.3rem;
+    height: 3rem;
+    background-color: #430555;
+    border: none;
+}
+input[type="submit"]:hover{
+    background-color: #350741;
+    transition: 0.5s ease;
+}
+#register{
+    text-decoration: none;
+    color: black;
+}
