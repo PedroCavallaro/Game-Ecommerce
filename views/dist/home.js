@@ -33,18 +33,19 @@ add.forEach((e) => {
             unityValue: Number(unity.innerText)
         };
         if (localStorage.getItem("cart")) {
-            arrProducts = JSON.parse(localStorage.getItem("cart") || '{}');
-            arrProducts.push(product);
-            localStorage.setItem("cart", JSON.stringify(arrProducts));
-            shopCart?.classList.toggle("show");
-            const timer = setTimeout(() => {
-                shopCart?.classList.remove("show");
-                clearTimeout(timer);
-            }, 3000);
-            updateCart(item);
+            if (!(arrProducts.find((e) => e.tittle == product.tittle))) {
+                arrProducts = JSON.parse(localStorage.getItem("cart") || '{}');
+                arrProducts.push(product);
+                localStorage.setItem("cart", JSON.stringify(arrProducts));
+                shopCart?.classList.toggle("show");
+                const timer = setTimeout(() => {
+                    shopCart?.classList.remove("show");
+                    clearTimeout(timer);
+                }, 3000);
+                updateCart(item);
+            }
         }
         else {
-            updateCart(item);
             const timer = setTimeout(() => {
                 shopCart?.classList.remove("show");
                 clearTimeout(timer);
@@ -59,13 +60,16 @@ function updateCart(div) {
     let arrProducts = [];
     arrProducts = JSON.parse(localStorage.getItem("cart") || "{}");
     arrProducts.forEach((e) => {
-        div.innerHTML = `<img class="shop-cart-img"  src="${e.cover}" alt="">
-        <div class="info">
-            <p class="game-tittle-cart">${e.tittle}</p>
-            <div class="action-buttons">
-                <input class="action m" type="button" value="+">
-                <input class="action" type="button" value="0">
-                <input class="action l" type="button" value="-">
+        div.innerHTML += `
+        <div class='item-show'>
+            <img class="shop-cart-img"  src="${e.cover}" alt="">
+            <div class="info">
+                <p class="game-tittle-cart">${e.tittle}</p>
+                <div class="action-buttons">
+                    <input class="action m" type="button" value="+">
+                    <input class="action" type="button" value="0">
+                    <input class="action l" type="button" value="-">
+                </div>
             </div>
         </div>`;
     });

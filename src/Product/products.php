@@ -70,7 +70,10 @@ function getProducts($username){
 
         for ($i=0; $i < 3 ; $i++) { 
             $data = $result->fetch(PDO::FETCH_ASSOC);
-            array_push($img, $data["nome_arquivo"]);
+            if(!isset($data["nome_arquivo"])){
+                $data["nome_arquivo"] = "default.jpg";
+            }
+           $img[$i] = $data["nome_arquivo"];
         }
         $sql2 = "SELECT * 
                 FROM produto
@@ -78,7 +81,7 @@ function getProducts($username){
 
         $result = $bd->query($sql2);
         $data = $result->fetch(PDO::FETCH_ASSOC);
-
+      
         echo " 
         <div class='poduct-main-container'>
         <aside class='preview'>
