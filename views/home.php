@@ -1,4 +1,5 @@
 <?php
+
 $username = $_GET['username'];
 if(!isset($username)){
     header("location:./login.php");
@@ -81,8 +82,11 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
        
             for ($i=0; $i < $c; $i++) { 
                 searchProduct($gamesFound[$i]);
+                
             }
+            
             session_destroy();
+      
         }else{
            echo getProducts($username);
         }

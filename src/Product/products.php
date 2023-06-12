@@ -79,26 +79,32 @@ function getProducts($username){
         $result = $bd->query($sql2);
         $data = $result->fetch(PDO::FETCH_ASSOC);
 
-        echo "  <aside class='preview'>
-                  <img class='preview-img' src='../covers/".$img[0]."' alt=''>
-                <img class='preview-img' src='../covers/".$img[1]."' alt=''>
+        echo " 
+        <div class='poduct-main-container'>
+        <aside class='preview'>
+            <div class='background'>
+                <img class='preview-img img' src='../covers/".$img[2]."' alt=''>
+             </div>
+             <div>
+                 <img class='preview-img img' src='../covers/".$img[1]."' alt=''>
+             </div>
               </aside>
               <div>
-                	<img class='main-img' src='../covers/".$img[2]."' alt='' srcset='>
+                	<img class='main-img' src='../covers/".$img[0]."' alt='' srcset=''>
               </div>
               <div class='product-info'>
                 	<div class='top-info'>
-                  		<h2 id='value'>R$".$data["valor"]."</h2>
+                  		<h2 id='value'>R$".$data["valor_unitario"]."</h2>
                   		<label id='product-label' for='add-to-cart'>
-                          <img id='shop-cart' src='../assets/shopcart.png' alt='>
+                          <img id='shop-cart' src='../assets/shopcart.png' alt=''>
                           <p>Comprar</p>  
                     	</label>
                	 	</div>
 					<div class='product-desc'>
-                        <h2>".$data["nome_pro"]."</h2>
-						<p>OLA BOM DIA</p>
+                        <h2 >".$data["nome_pro"]."</h2>
+						<p id='desc'>".$data["descricao"]."</p>
 					</div>
-              	</div>'";
+              	</div>";
     }
     function searchProduct($cod){
             $bd = connect();

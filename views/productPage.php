@@ -44,29 +44,10 @@ $username = filter_input(INPUT_GET, "username", FILTER_SANITIZE_SPECIAL_CHARS);
     </header>
   <main>
       <section class="product-section">
-          <div class="poduct-main-container">
-              <aside class="preview">
-                  <img class="preview-img" src="../covers/monster-hunter-world.jpeg" alt="">
-                  <img class="preview-img" src="../covers/monster-hunter-world.jpeg" alt="">
-              </aside>
-              <div>
-                	<img class="main-img" src="../covers/monster-hunter-world.jpeg" alt="" srcset="">
-              </div>
-              <div class="product-info">
-                	<div class="top-info">
-                  		<h2 id="value">R$235.00</h2>
-                  		<label id="product-label" for="add-to-cart">
-                          <img id="shop-cart" src="../assets/shopcart.png" alt="">
-                          <p>Comprar</p>  
-                    	</label>
-               	 	</div>
-					<div class="product-desc">
-						<p>OLA BOM DIA</p>
-					</div>
-              	</div>
-          	</div>
+         <?=renderProduct($idProd)?>
       </section>
   </main>
+  <script src="./dist/prodPage.js"></script>
 </body>
 
 </html>
