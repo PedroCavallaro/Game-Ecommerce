@@ -61,6 +61,20 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
             </div>
         </div>
         <?php
+            if($gamesFound == ""){
+                echo "<h1 id='news'>Novidades</h1>
+                <div class='carrousel-container'>
+                    <div class='carrousel'>
+                        <div class='img-carrousel'>";
+                        getImages();
+                        echo "</div>
+                    </div>
+                </div>";
+            }
+        ?>
+        
+        <section class="products">
+        <?php
        
         if($gamesFound != ""){
             $c = count($gamesFound);
@@ -74,6 +88,7 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
         }
 
         ?>
+        </section>
     </main>
     <script src="./dist/home.js"></script>
 </body>

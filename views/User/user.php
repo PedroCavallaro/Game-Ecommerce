@@ -3,7 +3,7 @@ include_once "./src/user.php";
 $username = $_GET["username"];
 session_start();
 
-$id = $_SESSION["user"];
+$id = isset($_SESSION["user"]) ? $_SESSION['user']: "";
 ?>
 <!DOCTYPE html>
 <html lang="en">

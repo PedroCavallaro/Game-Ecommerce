@@ -3,10 +3,11 @@ const shopCartBtn: HTMLImageElement | null = document.querySelector("#shopCart")
     shopCart:HTMLDivElement | null = document.querySelector(".shop-cart-container"),
     closeCart:HTMLImageElement | null = document.querySelector("#arrow-left"),
     add: NodeListOf<HTMLImageElement> = document.querySelectorAll(".add"),
-    item: HTMLDivElement | null = document.querySelector(".item")
-
+    item: HTMLDivElement | null = document.querySelector(".item"),
+    carrousel:HTMLDivElement | null = document.querySelector(".img-carrousel"),
+    covers:NodeListOf<HTMLImageElement> = document.querySelectorAll(".i")
     
-
+let c = 0;
 interface Product{
     cover: string,
     tittle: string,
@@ -16,8 +17,17 @@ interface Product{
 window.addEventListener("load", ()=>{
     if(localStorage.getItem("cart")){
         updateCart(item);
-
     }
+    setInterval(()=>{
+        c+= 50;
+        carrousel!.style.transform = `translate(-${c}%)`
+        carrousel!.style.transition = "2s ease"
+        if(c === (covers.length * 50)){
+            c = 0
+            carrousel!.style.transform = `translate(0%)`
+            carrousel!.style.transition = "2s ease"
+        }
+    }, 1 * 100 * 30)
 })
 shopCartBtn?.addEventListener('click', ()=>{    
     shopCart?.classList.toggle("show")

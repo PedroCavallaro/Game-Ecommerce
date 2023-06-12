@@ -1,9 +1,20 @@
 "use strict";
-const shopCartBtn = document.querySelector("#shopCart"), shopCart = document.querySelector(".shop-cart-container"), closeCart = document.querySelector("#arrow-left"), add = document.querySelectorAll(".add"), item = document.querySelector(".item");
+const shopCartBtn = document.querySelector("#shopCart"), shopCart = document.querySelector(".shop-cart-container"), closeCart = document.querySelector("#arrow-left"), add = document.querySelectorAll(".add"), item = document.querySelector(".item"), carrousel = document.querySelector(".img-carrousel"), covers = document.querySelectorAll(".i");
+let c = 0;
 window.addEventListener("load", () => {
     if (localStorage.getItem("cart")) {
         updateCart(item);
     }
+    setInterval(() => {
+        c += 50;
+        carrousel.style.transform = `translate(-${c}%)`;
+        carrousel.style.transition = "2s ease";
+        if (c === (covers.length * 50)) {
+            c = 0;
+            carrousel.style.transform = `translate(0%)`;
+            carrousel.style.transition = "2s ease";
+        }
+    }, 1 * 100 * 30);
 });
 shopCartBtn?.addEventListener('click', () => {
     shopCart?.classList.toggle("show");
