@@ -19,7 +19,7 @@ while($data = $result->fetch(PDO::FETCH_ASSOC)){
 session_start();
 $_SESSION["gamesFound"] = $gamesFound;
 
-header("location:../../views/foundMovie.php?username=$username&search=$search");
+header("location:../../views/home.php?username=$username&search=$search");
 
 
 ?>

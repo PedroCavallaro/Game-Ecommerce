@@ -41,6 +41,12 @@ header > img{
     height: 7rem;
     width: 8rem;
 }
+header > a >  img{
+    margin-left: 7px;
+    object-fit: cover;
+    height: 7rem;
+    width: 8rem;
+}
 .headerImg{
     height: 3rem;
     width: 3rem;

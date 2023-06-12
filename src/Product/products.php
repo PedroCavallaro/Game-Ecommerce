@@ -23,7 +23,7 @@ function getProducts(){
                  <div class='price-info'>
                      <div>
                          <h3 class='price'>Valor</h3>
-                         <h3 class='price'>".$data["valor_unitario"]."</h3>
+                         <h3 class='price'>R$ ".$data["valor_unitario"]."</h3>
                      </div>
                      <label for=''>
                          <img class='arrow' src='../assets/arrow-rigth.png' alt=''>
@@ -54,8 +54,8 @@ function getProducts(){
             <div class='price-info'>
                 <div>
                     <h3 class='price'>Valor</h3>
-                    <h3 class='price'>".$data["valor_unitario"]."</h3>
-                </div>
+                    <h3 class='price'>R$ ".$data["valor_unitario"]."</h3>
+                </div> 
                 <label for=''>
                     <img class='arrow' src='../assets/arrow-rigth.png' alt=''>
                 </label>
