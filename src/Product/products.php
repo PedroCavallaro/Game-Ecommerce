@@ -3,7 +3,6 @@ include_once "../src/bd.php";
 
 function getProducts()
 {
-
   $bd = connect();
 
   $sql = "SELECT p.*,
@@ -36,6 +35,7 @@ function getProducts()
               </div>
             </a>";
   }
+
 }
 
 function searchProduct($cod)
@@ -67,6 +67,7 @@ function searchProduct($cod)
               <label for=''>
                 <img class='arrow' src='../assets/arrow-rigth.png' alt=''>
               </label>
+
             </div>
           </div>
         </div>";

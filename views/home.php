@@ -1,6 +1,13 @@
 <?php
 $username = $_GET['username'];
-include_once "../src/Product/products.php"
+if(!isset($username)){
+    header("location:./login.php");
+}
+include_once "../src/Product/products.php";
+session_start();
+$gamesFound = isset($_SESSION["gamesFound"]) ? $_SESSION["gamesFound"] : "";
+
+$search =  isset($_GET["search"]) ? $_GET["search"] : "";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,7 +21,9 @@ include_once "../src/Product/products.php"
 </head>
 <body>
     <header>
-        <img  src="../assets/icon_logo.png" alt="">
+        <a href="./home.php?username=<?=$username?>">
+            <img  src="../assets/icon_logo.png" alt="">
+        </a>
         <div>
             <form action="../src/Product/search.php?username=<?=$username?>" method="POST" id="searchContainer" for="">
                 <input type="text" name="search">
@@ -29,13 +38,32 @@ include_once "../src/Product/products.php"
                 <a href="User/user.php?username=<?=$username?>">
                     <img class="headerImg" src="../assets/user.png" alt="userIcon">
                 </a>
-                <h2>Olá <?=$username?></h2>
+                <h3>Olá <?=$username?></h3>
             </div>
             <img class="headerImg" src="../assets/shopcart.png" alt="shopcart" srcset="">
         </div>
     </header>
+    <?php
+    
+    if($gamesFound != ""){
+        echo "<h2>Resultados para '$search'</h2>";
+    }
+    ?>
     <main>
-        <?=getProducts()?>
+        <?php
+       
+        if($gamesFound != ""){
+            $c = count($gamesFound);
+       
+            for ($i=0; $i < $c; $i++) { 
+                searchProduct($gamesFound[$i]);
+            }
+            session_destroy();
+        }else{
+           echo getProducts();
+        }
+
+        ?>
     </main>
 </body>
 </html>

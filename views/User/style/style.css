@@ -10,7 +10,7 @@ header{
     align-items: center;
 }
 header > a > img{
-    height: 3rem;
+    height: 2.5rem;
     object-fit: cover;
     cursor: pointer;
 }
