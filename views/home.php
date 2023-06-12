@@ -40,7 +40,7 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
                 </a>
                 <h3>Olá <?=$username?></h3>
             </div>
-            <img class="headerImg" src="../assets/shopcart.png" alt="shopcart" srcset="">
+            <img class="headerImg" src="../assets/shopcart.png" id="shopCart" alt="shopcart" srcset="">
         </div>
     </header>
     <?php
@@ -50,6 +50,16 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
     }
     ?>
     <main>
+        <div class="shop-cart-container"> 
+            <img id="arrow-left" class="arrow" src="../assets/arrow-rigth.png" alt="">
+            <div class="item">
+            </div>
+            <div class="go-to-payment">
+                <a href="">
+                    <input type="button" value="ir para pagamento">
+                </a>
+            </div>
+        </div>
         <?php
        
         if($gamesFound != ""){
@@ -60,10 +70,11 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
             }
             session_destroy();
         }else{
-           echo getProducts();
+           echo getProducts($username);
         }
 
         ?>
     </main>
+    <script src="./dist/home.js"></script>
 </body>
 </html>

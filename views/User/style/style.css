@@ -29,5 +29,68 @@ body{
     height: 6rem;
 }
 .previous-buys{
+    margin-top: 2rem;
     margin-left: 1rem;
+}
+.user-section{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-info-container{
+    padding: 1rem;
+    gap: 2rem;
+    justify-content: center;
+    display: flex;
+}
+.user-info{
+    display:flex;
+    flex-direction: column;
+}
+input[type="text"]{
+    outline:none ;
+    height: 1.7rem;
+    width: 17rem;
+    color: white;
+    border: none;
+    background: none;
+    transition: 0.5s;
+}
+input[type="text"].edit{
+    transition: 0.5s;
+    background-color: white;
+    color:black;
+}
+#edit{
+    margin-top: 1.3rem;
+    right: 0;
+}
+#edit > img{
+    cursor: pointer;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.save-changes-div{
+    display: none;
+}
+.save-changes-div.show{
+    display: block;
+}
+#save-changes{   
+    margin-top: 1.3rem;
+    cursor: pointer;
+    width: 15rem;
+    height: 2rem;
+    color: white;
+    background-color: #430555;
+    border: none;
+}
+#save-changes:hover{
+    background-color: #350741;
+    transition: 0.5s ease;
+}
+.fields{
+    display: flex;
+    flex-direction: column;
 }

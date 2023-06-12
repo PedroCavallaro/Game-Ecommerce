@@ -20,7 +20,9 @@ $username = filter_input(INPUT_GET, "username", FILTER_SANITIZE_SPECIAL_CHARS);
 
 <body>
   <header>
-    <img src="../assets/icon_logo.png" alt="">
+    <a href="./home.php?username=<?=$username?>">
+      <img src="../assets/icon_logo.png" alt="">
+    </a>
     <div>
       <form action="../src/Product/search.php?username=<?= $username ?>" method="POST" id="searchContainer" for="">
         <input type="text" name="search">

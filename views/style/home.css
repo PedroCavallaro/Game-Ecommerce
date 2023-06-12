@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+ 
 }
 
 header {
@@ -11,6 +12,7 @@ header {
   height: 6rem;
 }
 body {
+    overflow-x: hidden;
   background: linear-gradient(to right, #5b0672, #033371);
 }
 #searchContainer {
@@ -40,6 +42,12 @@ header > img {
   height: 7rem;
   width: 8rem;
 }
+header > a > img {
+  margin-left: 7px;
+  object-fit: cover;
+  height: 7rem;
+  width: 8rem;
+}
 .headerImg {
   height: 3rem;
   width: 3rem;
@@ -57,11 +65,101 @@ header > img {
   flex-direction: column;
 }
 main {
+    
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80dvh;
   gap: 2rem;
+}
+.shop-cart-container{
+    display: none;
+}
+.shop-cart-container.show{
+    display: block;
+    background-color: white;
+    position: absolute;
+    height: 100%;
+    width: 16%;
+    right: 0;
+    top: 0;
+    animation: showCart 1s;
+    z-index: 90;
+}
+.go-to-payment{
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.go-to-payment > a > input{
+    cursor: pointer;
+    width: 10rem;
+    height: 2rem;
+    color: white;
+    background-color: #4c1b6e;
+    border-radius: 0.5rem;
+    border: none;
+}
+@keyframes showCart {
+    0%{
+        right: -20%;
+    }
+    100%{
+        right: 0;
+    }
+}
+.item{
+    display: flex;
+    margin-top: 2rem;
+    margin-left: 5px;
+}
+.info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.game-tittle-cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.action-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.action{
+    font-size: 13px;
+    color: white;
+    border: none;
+    background-color: #4c1b6e;
+    height: 1.3rem;
+    width: 2rem;
+}
+.action.l{
+    cursor: pointer;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+}
+.action.m{
+    cursor: pointer;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+}
+.shop-cart-img{
+    height: 6rem;
+    width: 4rem;
+    object-fit: cover;
+}
+.add{
+    cursor:pointer;
+    position: relative;
+    height: 1.3rem;
+    width: 1.3rem;
+    top:-2rem;
 }
 .card {
   flex-direction: column;
@@ -101,7 +199,7 @@ main {
 }
 .price-info {
   margin-bottom: 0.5rem;
-  margin-left: 3rem;
+  margin-left: 1rem;
   width: 18rem;
   display: flex;
   justify-content: space-between;
@@ -122,3 +220,4 @@ main {
   height: 2rem;
   width: 2rem;
   margin-right: 2.3rem;
+}

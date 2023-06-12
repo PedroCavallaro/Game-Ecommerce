@@ -16,6 +16,8 @@ try{
         $data = $result -> fetch(PDO::FETCH_ASSOC);
         
         if(isset($data["cpf_cnpj_cli"])){
+                session_start();
+                $_SESSION["user"] = $data["cpf_cnpj_cli"];
                header("location:../views/home.php?username=".$data["nome_cli"]."");
         
         }else{
