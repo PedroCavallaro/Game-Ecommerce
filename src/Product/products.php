@@ -42,6 +42,28 @@ function getProducts($username)
     }
   }
 }
+
+function getImages($username)
+{
+  $bd = connect();
+
+  $sql = "SELECT i.*,
+                p.nome_pro
+            FROM imagem i
+            INNER JOIN produto p
+            ON i.codigo_prod = p.codigo_prod
+            GROUP BY codigo_prod";
+
+  $result = $bd->query($sql);
+
+  while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
+    echo "
+        <a href='./productPage.php?username=$username&id=" . $data["codigo_prod"] . "'>
+            <img class='i'  src='../covers/" . $data["nome_arquivo"] . "' alt=''>
+        </a>";
+  }
+}
+
 function renderProduct($id)
 {
   $bd = connect();
