@@ -19,10 +19,10 @@ window.addEventListener("load", ()=>{
         updateCart(item);
     }
     setInterval(()=>{
-        c+= 50;
-        carrousel!.style.transform = `translate(-${c}%)`
+        c+= 70;
+        carrousel!.style.transform = `translate(-${c}rem)`
         carrousel!.style.transition = "2s ease"
-        if(c === (covers.length * 50)){
+        if(c === (covers.length * 70)){
             c = 0
             carrousel!.style.transform = `translate(0%)`
             carrousel!.style.transition = "2s ease"
@@ -56,7 +56,7 @@ add.forEach((e)=>{
             arrProducts = JSON.parse(localStorage.getItem("cart") || '{}')  
             console.log(arrProducts[0])
             if(!(arrProducts.find((e)=> e.tittle == product.tittle))){
-                console.log("oi")
+                
 
                 arrProducts.push(product)
                 localStorage.setItem("cart", JSON.stringify(arrProducts))

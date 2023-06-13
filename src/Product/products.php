@@ -18,7 +18,6 @@ function getImages($username){
         echo "
         <a href='./productPage.php?username=$username&id=".$data["codigo_prod"]."'>
             <img class='i'  src='../covers/".$data["nome_arquivo"]."' alt=''>
-            <h2 id='carrousel-game-tittle'>".$data["nome_pro"]."</h2>
         </a>";
     }
 
