@@ -48,7 +48,8 @@ function getImages($username)
   $bd = connect();
 
   $sql = "SELECT i.*,
-                p.nome_pro
+                p.nome_pro,
+                p.quantidade
             FROM imagem i
             INNER JOIN produto p
             ON i.codigo_prod = p.codigo_prod
@@ -57,11 +58,14 @@ function getImages($username)
   $result = $bd->query($sql);
 
   while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
-    echo "
-        <a href='./productPage.php?username=$username&id=" . $data["codigo_prod"] . "'>
-            <img class='i'  src='../covers/" . $data["nome_arquivo"] . "' alt=''>
-        </a>";
-  }
+    if($data["quantidade"] != 0){
+        echo "
+            <a href='./productPage.php?username=$username&id=" . $data["codigo_prod"] . "'>
+                <img class='i'  src='../covers/" . $data["nome_arquivo"] . "' alt=''>
+            </a>";
+         
+    }
+    }
 }
 
 function renderProduct($id)
@@ -87,35 +91,37 @@ function renderProduct($id)
 
   $result = $bd->query($sql2);
   $data = $result->fetch(PDO::FETCH_ASSOC);
+  if($data["quantidade"] != 0){
 
-  echo " 
-        <div class='poduct-main-container'>
-        <aside class='preview'>
-            <div class='background'>
-                <img class='preview-img img' src='../covers/" . $img[2] . "' alt=''>
-             </div>
-             <div class='background'>
-                 <img class='preview-img img' src='../covers/" . $img[1] . "' alt=''>
-             </div>
-              </aside>
-              <div>
-                	<img class='main-img' src='../covers/" . $img[0] . "' alt='' srcset=''>
-              </div>
-              <div class='product-info'>
-                	<div class='top-info'>
-                  		<h2 id='value'>R$" . $data["valor_unitario"] . "</h2>
-                  		<label id='product-label' for='add-to-cart'>
-                          <img id='shop-cart' src='../assets/shopcart.png' alt=''>
-                          <p>Comprar</p>  
-                    	</label>
-               	 	</div>
-					<div class='product-desc'>
-                        <h2 >" . $data["nome_pro"] . "</h2>
-						<p id='desc'>" . $data["descricao"] . "</p>
-					</div>
-              	</div>";
+      echo " 
+            <div class='poduct-main-container'>
+            <aside class='preview'>
+                <div class='background'>
+                    <img class='preview-img img' src='../covers/" . $img[2] . "' alt=''>
+                 </div>
+                 <div class='background'>
+                     <img class='preview-img img' src='../covers/" . $img[1] . "' alt=''>
+                 </div>
+                  </aside>
+                  <div>
+                        <img class='main-img' src='../covers/" . $img[0] . "' alt='' srcset=''>
+                  </div>
+                  <div class='product-info'>
+                        <div class='top-info'>
+                              <h2 id='value'>R$" . $data["valor_unitario"] . "</h2>
+                              <label id='product-label' for='add-to-cart'>
+                              <img id='shop-cart' src='../assets/shopcart.png' alt=''>
+                              <p>Comprar</p>  
+                            </label>
+                            </div>
+                        <div class='product-desc'>
+                            <h2 >" . $data["nome_pro"] . "</h2>
+                            <p id='desc'>" . $data["descricao"] . "</p>
+                        </div>
+                      </div>";
+  }
 }
-function searchProduct($cod)
+function searchProduct($cod, $username)
 {
   $bd = connect();
   $sql = "SELECT p.*,
@@ -128,21 +134,51 @@ function searchProduct($cod)
   $result = $bd->query($sql);
   $data = $result->fetch(PDO::FETCH_ASSOC);
 
-  echo "<div class='card'>
-                <div class='cover'>
-                    <img  src='../covers/" . $data['nome_arquivo'] . "' alt=''>
-                </div>
-                <h3 class='gameTitle'>" . $data["nome_pro"] . "</h3>
-                <div class='info'>
-                    <div class='price-info'>
-                        <div>
-                            <h3 class='price'>Valor</h3>
-                            <h3 class='price'>R$ " . $data["valor_unitario"] . "</h3>
-                        </div> 
-                        <label for=''>
-                            <img class='arrow' src='../assets/arrow-rigth.png' alt=''>
-                        </label>
+  if($data["quantidade"] != 0){
+
+
+      echo "<div class='card'>
+                    <div class='cover'>
+                        <img  src='../covers/" . $data['nome_arquivo'] . "' alt=''>
                     </div>
-                    </div>
-                </div>";
+                    <h3 class='gameTitle'>" . $data["nome_pro"] . "</h3>
+                    <div class='info'>
+                        <div class='price-info'>
+                            <div>
+                                <h3 class='price'>Valor</h3>
+                                <h3 class='price'>R$ " . $data["valor_unitario"] . "</h3>
+                            </div> 
+                            <label for=''>
+                                <a href='./productPage.php?username=$username&id=$cod'>
+                                    <img class='arrow' src='../assets/arrow-rigth.png' alt=''>
+                                </a>
+                            </label>
+                        </div>
+                        </div>
+                    </div>";
+  }
+}
+function shipmentInfo($id){
+    $bd = connect();
+
+    $sql = "SELECT c.*
+                FROM  cliente c
+                WHERE cpf_cnpj_cli = $id";
+
+    $result = $bd->query($sql);
+
+    $data = $result->fetch(PDO::FETCH_ASSOC);
+
+    return "<label for='cep'>CEP:</label>
+    <input type='text'class='req'  id='cep' value='".$data["cep_cli"]."'name='cep'><br>
+    <label for='number'>Numero:</label>
+    <input type='text'class='req' value='".$data["numero_cli"]."'  id='number' name='number'><br>
+    <label for='bairro'>Bairro:</label>
+    <input type='text' class='req'value='".$data["bairro_cli"]."' id='bairro' name='neigb'><br>
+    <label for='city'>Cidade:</label>
+    <input type='text' class='req'value='".$data["cidade_cli"]."' id='localidade' name='city'><br>
+    <label for='uf'>Estado:</label>
+    <input type='text'class='req' value='".$data["estado_cli"]."' id='uf' name='state'><br>
+    <label for='logradouro'>Endereço:</label>
+    <input type='text' class='req'value='".$data["endereco_cli"]."' id='logradouro' name='address'>";
 }

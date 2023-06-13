@@ -6,8 +6,9 @@ const shopCartBtn: HTMLImageElement | null = document.querySelector("#shopCart")
     item: HTMLDivElement | null = document.querySelector(".item"),
     carrousel:HTMLDivElement | null = document.querySelector(".img-carrousel"),
     covers:NodeListOf<HTMLImageElement> = document.querySelectorAll(".i")
+  
     
-let c = 0;
+
 interface Product{
     cover: string,
     tittle: string,
@@ -16,6 +17,7 @@ interface Product{
     qtd: number
 }
 window.addEventListener("load", ()=>{
+    let c = 0;
     if(localStorage.getItem("cart")){
         updateCart(item);
     }
@@ -29,18 +31,25 @@ window.addEventListener("load", ()=>{
             carrousel!.style.transition = "2s ease"
         }
     }, 1 * 100 * 30)
+    addAndDecrease()
+
 })
 shopCartBtn?.addEventListener('click', ()=>{    
     shopCart?.classList.toggle("show")
 })
 closeCart?.addEventListener('click', ()=>{
-    shopCart?.classList.toggle("show")
-   
+    shopCart?.classList.toggle("show") 
 })
+
 
 add.forEach((e)=>{
     let arrProducts: Product[] = []
     e.addEventListener("click", ()=>{
+        shopCart?.classList.toggle("show")
+        const timer =setTimeout(() => {
+            shopCart?.classList.remove("show")
+            clearTimeout(timer)
+        }, 3000);
         const cover:any = e.parentElement?.childNodes[1].childNodes[1] ,
             tittle:any= e.parentElement?.childNodes[3],
             value: any = e.parentElement?.childNodes[7].childNodes[1].childNodes[1].childNodes[3],
@@ -56,32 +65,22 @@ add.forEach((e)=>{
 
         if(localStorage.getItem("cart")){
             arrProducts = JSON.parse(localStorage.getItem("cart") || '{}')  
-    
-            if(!(arrProducts.find((e)=> e.tittle == product.tittle))){
-
+            if(!(arrProducts.find((e)=> e.tittle == product.tittle))){  
                 arrProducts.push(product)
                 localStorage.setItem("cart", JSON.stringify(arrProducts))
-                shopCart?.classList.toggle("show")
-            
-                const timer = setTimeout(() => {
-                    shopCart?.classList.remove("show")
-                    clearTimeout(timer)
-                        }, 3000);
                 updateCart(item)
             }
         }else{
-           const timer =setTimeout(() => {
-               shopCart?.classList.remove("show")
-                clearTimeout(timer)
-                }, 300);
             arrProducts.push(product)
             localStorage.setItem("cart", JSON.stringify(arrProducts))
-       
-
+            updateCart(item)
+            
         }
+        addAndDecrease()
     })
 })
 function updateCart(div: HTMLDivElement | null){
+    let count = 0;
     div!.innerHTML = ""
     let arrProducts: Product[] = []
     arrProducts = JSON.parse(localStorage.getItem("cart") || "{}")
@@ -91,15 +90,55 @@ function updateCart(div: HTMLDivElement | null){
         <div class='item-show'>
             <img class="shop-cart-img"  src="${e.cover}" alt="">
             <div class="info">
-                <p class="game-tittle-cart">${e.tittle}</p>
+                <p id="tittle${count}" class="game-tittle-cart">${e.tittle}</p>
                 <div class="action-buttons">
-                    <input class="action m" type="button" value="+">
-                    <input class="action" type="button" value="0">
-                    <input class="action l" type="button" value="-">
+                    <input id="${count}" class="action m" type="button" value="+">
+                    <input class="action" type="button" value="${e.qtd}">
+                    <input id="${count}" class="action l" type="button" value="-">
                 </div>
             </div>
         </div>`
+        count++;
+        
+    })
+}
+function updateLs(productName: string, button:HTMLInputElement){
+    let arr: Product[] = []
+    arr = JSON.parse(localStorage.getItem("cart") || '{}')
+
+    arr.map((e)=>{
+        if(e.tittle == productName){
+            if(button.classList.contains("m")){
+                e.qtd += 1
+                e.value += e.unityValue
+            }else{
+                e.value -= e.unityValue
+                e.qtd -= 1
+            }
+            
+        }
     })
 
-
+    localStorage.setItem("cart", JSON.stringify(arr))
+}
+function addAndDecrease(){
+    const actionBtns: NodeListOf<HTMLInputElement> = document.querySelectorAll(".action")
+    
+    actionBtns.forEach((e)=>{
+        const qtd:any = e.parentElement?.childNodes[3]
+        const name = document.querySelector(("#tittle" + e.id)) 
+        e.addEventListener('click', ()=>{
+            
+            if(e.classList.contains("m")){
+                qtd.value = Number(qtd.value) + 1 
+                updateLs(name!.innerHTML, e)
+            }
+            else if(e.classList.contains("l")){
+                if(qtd.value != 0){
+                    qtd.value = Number(qtd.value) - 1 
+                    updateLs(name!.innerHTML, e)  
+                }
+            }
+        })
+    })
 }

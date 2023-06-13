@@ -82,7 +82,7 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
             $c = count($gamesFound);
        
             for ($i=0; $i < $c; $i++) { 
-                searchProduct($gamesFound[$i]);
+                searchProduct($gamesFound[$i],$username);
                 
             }
             $user = $_SESSION["user"];

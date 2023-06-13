@@ -1,6 +1,10 @@
 <?php
+include_once "../src/Product/products.php";
 $username = $_GET["username"];
 
+session_start();
+
+$id = $_SESSION["user"]
 
 ?>
 <!DOCTYPE html>
@@ -29,23 +33,19 @@ $username = $_GET["username"];
             </form>
         </div>
         <div class="user-section">
-            <div>
-                <a href="User/user.php?username=<?=$username?>">
-                    <img class="headerImg" src="../assets/user.png" alt="userIcon">
+            <div id="user-img">
+                <a  href="User/user.php?username=<?=$username?>">
+                    <img  class="headerImg" src="../assets/user.png" alt="userIcon">
                 </a>
                 <h3>Olá <?=$username?></h3>
             </div>
-            <img class="headerImg" src="../assets/shopcart.png" id="shopCart" alt="shopcart" srcset="">
         </div>
     </header>
-    <main>
+    <form action="" method="POST">
         <section class="left">
             <div class="total-price">
-                <h2>Total:</h2>
-                <h2>2350</h2>
-            </div>
-            <div id='total-itens'>
-                <h2>ITENS</h2>
+                <p>Total:</p>
+                <h2 id="value"> 2350</h2>
             </div>
            <div class="items-cart-container">
 
@@ -56,20 +56,27 @@ $username = $_GET["username"];
             <div class="payment-methods">
                 <label class="payment-label" for="">
                     <img class="payment-img" src="../assets/credit.png" alt="">
-                    <h3>Cartão de crédito</h3>
+                    <p>Cartão de crédito</p>
                 </label>
                 <label class="payment-label" for="">
                     <img  class="payment-img" src="../assets/debit.png" alt="">
-                    <h3>Cartão de Débito</h3>
+                    <p>Cartão de Débito</p>
                 </label>
             </div>
         </section>
         <section class="right">
             <div class="shipment-info">
                 <h2>Informações de entrega</h2>
+                    <div class="inputs">
+                        <?=shipmentInfo($id)?>
+                    </div>
+                    <div class="pay">
+                        <input type="submit" value="Finalizar">
+                    </div>
+                </form>
             </div>  
         </section>
-    </main>
+    </form>
     <script src="./dist/payment.js"></script>
 </body>
 </html>
