@@ -1,4 +1,5 @@
 <?php
+
 $username = $_GET['username'];
 if(!isset($username)){
     header("location:./login.php");
@@ -51,7 +52,8 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
     ?>
     <main>
         <div class="shop-cart-container"> 
-            <img id="arrow-left" class="arrow" src="../assets/arrow-rigth.png" alt="">
+            <p id="arrow-left" class="arrow">></p>
+            <!-- <img id="arrow-left" class="arrow" src="../assets/arrow-rigth.png" alt=""> -->
             <div class="item">
             </div>
             <div class="go-to-payment">
@@ -61,19 +63,39 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
             </div>
         </div>
         <?php
+            if($gamesFound == ""){
+                echo "
+                <div class='carrousel-container'>
+                    <div class='carrousel'>
+                        <div class='img-carrousel'>";
+                        getImages($username);
+                        echo "</div>
+                    </div>
+                </div>";
+            }
+        ?>
+        
+        <section class="products">
+        <?php
        
         if($gamesFound != ""){
             $c = count($gamesFound);
        
             for ($i=0; $i < $c; $i++) { 
                 searchProduct($gamesFound[$i]);
+                
             }
+            $user = $_SESSION["user"];
             session_destroy();
+            session_start();
+            $_SESSION["user"] = $user;
+      
         }else{
            echo getProducts($username);
         }
 
         ?>
+        </section>
     </main>
     <script src="./dist/home.js"></script>
 </body>

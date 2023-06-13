@@ -18,7 +18,7 @@ try{
         if(isset($data["cpf_cnpj_cli"])){
                 session_start();
                 $_SESSION["user"] = $data["cpf_cnpj_cli"];
-               header("location:../views/home.php?username=".$data["nome_cli"]."");
+                header("location:../views/home.php?username=".$data["nome_cli"]."");
         
         }else{
                 header('location:../views/login.php?err=1');

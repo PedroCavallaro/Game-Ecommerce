@@ -64,7 +64,58 @@ header > a > img {
   align-items: center;
   flex-direction: column;
 }
-main {
+.carrousel-container{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.carrousel{
+    display: flex;
+    background-color: black;
+    width: 70rem;
+    height: 25rem;
+    border-radius: 2rem;
+    overflow: hidden;
+}
+.img-carrousel{
+    display: flex;
+    position: relative;  
+}
+#news{
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+@keyframes carrousel {
+    0%{
+        transform: translate(0%)
+    }
+    100%{
+        transform: translate(-50%)
+    }
+}
+.i:hover{
+    transition: 1.8s;
+    scale: 1.1;
+}
+.i{
+    cursor: pointer;
+    width: 70rem;
+    object-fit: cover;
+    height: 25rem;
+    position: relative;
+  
+}
+#carrousel-game-tittle{
+  position: absolute;
+  color:black;
+  z-index: 999;
+  font-size: 25px;
+  margin-left: 7px;
+  top:1rem;
+}
+.products {
     
   display: flex;
   justify-content: center;
@@ -79,12 +130,13 @@ main {
     display: block;
     background-color: white;
     position: absolute;
-    height: 100%;
+    height: 200dvh;
     width: 16%;
     right: 0;
     top: 0;
     animation: showCart 1s;
     z-index: 90;
+    overflow: hidden;
 }
 .go-to-payment{
     padding: 1rem;
@@ -112,8 +164,13 @@ main {
 }
 .item{
     display: flex;
+    flex-direction: column;
     margin-top: 2rem;
     margin-left: 5px;
+}
+.item-show{
+    display: flex;
+    margin-bottom: 1rem;
 }
 .info{
     width: 100%;
@@ -216,6 +273,7 @@ main {
   color: #350741;
 }
 .arrow {
+    font-size: 2rem;
   cursor: pointer;
   height: 2rem;
   width: 2rem;
