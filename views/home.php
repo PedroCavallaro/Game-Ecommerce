@@ -52,7 +52,8 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
     ?>
     <main>
         <div class="shop-cart-container"> 
-            <img id="arrow-left" class="arrow" src="../assets/arrow-rigth.png" alt="">
+            <p id="arrow-left" class="arrow">></p>
+            <!-- <img id="arrow-left" class="arrow" src="../assets/arrow-rigth.png" alt=""> -->
             <div class="item">
             </div>
             <div class="go-to-payment">
@@ -63,11 +64,11 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
         </div>
         <?php
             if($gamesFound == ""){
-                echo "<h1 id='news'>Novidades</h1>
+                echo "
                 <div class='carrousel-container'>
                     <div class='carrousel'>
                         <div class='img-carrousel'>";
-                        getImages();
+                        getImages($username);
                         echo "</div>
                     </div>
                 </div>";
@@ -84,8 +85,10 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
                 searchProduct($gamesFound[$i]);
                 
             }
-            
+            $user = $_SESSION["user"];
             session_destroy();
+            session_start();
+            $_SESSION["user"] = $user;
       
         }else{
            echo getProducts($username);

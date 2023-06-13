@@ -2,19 +2,23 @@
 include_once "../src/bd.php";
 
 
-function getImages(){
+function getImages($username){
     $bd = connect();
     
-    $sql = "SELECT i.*
+    $sql = "SELECT i.*,
+                p.nome_pro
             FROM imagem i
+            INNER JOIN produto p
+            ON i.codigo_prod = p.codigo_prod
             GROUP BY codigo_prod";
     
     $result = $bd->query($sql);
     
     while($data = $result->fetch(PDO::FETCH_ASSOC)){
         echo "
-        <a href='./productPage.php?username=ola&id=".$data["codigo_prod"]."'>
+        <a href='./productPage.php?username=$username&id=".$data["codigo_prod"]."'>
             <img class='i'  src='../covers/".$data["nome_arquivo"]."' alt=''>
+            <h2 id='carrousel-game-tittle'>".$data["nome_pro"]."</h2>
         </a>";
     }
 
@@ -88,7 +92,7 @@ function getProducts($username){
             <div class='background'>
                 <img class='preview-img img' src='../covers/".$img[2]."' alt=''>
              </div>
-             <div>
+             <div class='background'>
                  <img class='preview-img img' src='../covers/".$img[1]."' alt=''>
              </div>
               </aside>

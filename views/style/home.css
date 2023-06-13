@@ -74,15 +74,14 @@ header > a > img {
 .carrousel{
     display: flex;
     background-color: black;
-    width: 50rem;
-    height: 20rem;
+    width: 70rem;
+    height: 25rem;
     border-radius: 2rem;
     overflow: hidden;
 }
 .img-carrousel{
     display: flex;
-    position: relative;
-    transform: translate(-50%) 1s ;   
+    position: relative;  
 }
 #news{
     margin-left: 0.5rem;
@@ -102,11 +101,19 @@ header > a > img {
 }
 .i{
     cursor: pointer;
-    width: 50rem;
+    width: 70rem;
     object-fit: cover;
-    height: 20rem;
+    height: 25rem;
     position: relative;
   
+}
+#carrousel-game-tittle{
+  position: absolute;
+  color:black;
+  z-index: 999;
+  font-size: 25px;
+  margin-left: 7px;
+  top:1rem;
 }
 .products {
     
@@ -266,6 +273,7 @@ header > a > img {
   color: #350741;
 }
 .arrow {
+    font-size: 2rem;
   cursor: pointer;
   height: 2rem;
   width: 2rem;

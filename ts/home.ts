@@ -51,10 +51,13 @@ add.forEach((e)=>{
             value: Number(value.innerText),
             unityValue: Number(unity.innerText)
         }
+
         if(localStorage.getItem("cart")){
-           if(!(arrProducts.find((e)=> e.tittle == product.tittle))){
-               
-                arrProducts = JSON.parse(localStorage.getItem("cart") || '{}')  
+            arrProducts = JSON.parse(localStorage.getItem("cart") || '{}')  
+            console.log(arrProducts[0])
+            if(!(arrProducts.find((e)=> e.tittle == product.tittle))){
+                console.log("oi")
+
                 arrProducts.push(product)
                 localStorage.setItem("cart", JSON.stringify(arrProducts))
                 shopCart?.classList.toggle("show")
