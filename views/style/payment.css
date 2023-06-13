@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+section{
+    border-left: 1px solid black ;
+    border-right:1px solid black ;
+    height: 100dvh;
+    background-color: white;
+    margin-top: 2rem ;
+    display: flex;
+   
+    flex-direction: column;
+}
+.total-price{
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left{
+    margin-left: 2rem;
+}
+.product-img{
+    height: 7rem;
+    width: 5rem;
+    object-fit: cover;
+}
+.items-cart-container{
+    /* margin-top: 1rem; */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.items-cart{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.items-cart > div{
+    padding: 0.5rem;
+    display: flex;
+}
+#total-itens{
+    display: flex;
+    justify-content: center;
+}
+.prod-info{
+    margin-left: 1rem;
+}
+.middle{
+    width: 30rem;
+}
+.payment-img{
+    width: 3rem;
+    height: 3rem;
+}
+#head-middle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.payment-methods{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.payment-methods > label{
+    border-radius: 1rem;
+    width: 20rem;
+    border: 2px solid black;
+    margin-top: 2rem;
+    cursor: pointer;
+    display: flex;
+}
+.payment-methods > label > h3{
+    margin-left: 1rem;
+}
+.payment-methods > label:hover{
+    border: 2px solid #350741;
+    color: #350741;
+}
+.payment-label{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}

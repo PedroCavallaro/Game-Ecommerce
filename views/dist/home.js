@@ -30,11 +30,11 @@ add.forEach((e) => {
             cover: cover.src,
             tittle: tittle.innerText,
             value: Number(value.innerText),
-            unityValue: Number(unity.innerText)
+            unityValue: Number(unity.innerText),
+            qtd: 1
         };
         if (localStorage.getItem("cart")) {
             arrProducts = JSON.parse(localStorage.getItem("cart") || '{}');
-            console.log(arrProducts[0]);
             if (!(arrProducts.find((e) => e.tittle == product.tittle))) {
                 arrProducts.push(product);
                 localStorage.setItem("cart", JSON.stringify(arrProducts));

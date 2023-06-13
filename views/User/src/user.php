@@ -22,7 +22,7 @@ function renderInfo($id){
                         readonly 
                         type='text' 
                         id='adress'
-                        name='address'
+                        name='adress'
                         value='".$data["endereco_cli"]."'
                         >
                     </div>
@@ -33,7 +33,7 @@ function renderInfo($id){
                         readonly 
                         type='text' 
                         id='neig' 
-                        name='neigb'
+                        name='neig'
                         value='".$data["bairro_cli"]."'
                         >
                     </div>

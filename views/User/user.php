@@ -10,6 +10,7 @@ $id = $_SESSION["user"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../assets/icon_logo.png" type="image.png">
     <link rel="stylesheet" href="../style/font.css">
     <link rel="stylesheet" href="style/style.css">
     <title>User page</title>
@@ -26,7 +27,7 @@ $id = $_SESSION["user"];
             <h1><?=$username?></h1>
         </div>
 
-        <form class="user-section" action="./src/update.php?username=<?=$username?>&id=<?=$id?>" method="POST">
+        <form class="user-section" action="./src/update.php" method="POST">
             <div id="edit">
                 <img src="../../assets/pencil.png" alt="">
             </div>

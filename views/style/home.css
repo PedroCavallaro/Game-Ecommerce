@@ -107,7 +107,14 @@ header > a > img {
     position: relative;
   
 }
-
+#carrousel-game-tittle{
+  position: absolute;
+  color:black;
+  z-index: 999;
+  font-size: 25px;
+  margin-left: 7px;
+  top:1rem;
+}
 .products {
     
   display: flex;
@@ -127,7 +134,7 @@ header > a > img {
     width: 16%;
     right: 0;
     top: 0;
-    animation: showCart 2s;
+    animation: showCart 1s;
     z-index: 90;
     overflow: hidden;
 }

@@ -57,7 +57,7 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
             <div class="item">
             </div>
             <div class="go-to-payment">
-                <a href="">
+                <a href="./payment.php?username=<?=$username?>">
                     <input type="button" value="ir para pagamento">
                 </a>
             </div>
