@@ -1,5 +1,6 @@
-const shopCartBtn = document.querySelector("#shopCart"), shopCart = document.querySelector(".shop-cart-container"), closeCart = document.querySelector("#arrow-left"), add = document.querySelectorAll(".add"), item = document.querySelector(".item"), carrousel = document.querySelector(".img-carrousel"), covers = document.querySelectorAll(".i");
+const shopCartBtn = document.querySelector("#shopCart"), shopCart = document.querySelector(".shop-cart-container"), closeCart = document.querySelector("#arrow-left"), add = document.querySelectorAll(".add"), item = document.querySelector(".item"), carrousel = document.querySelector(".img-carrousel"), covers = document.querySelectorAll(".i"), card = document.querySelectorAll(".card"), moveBtns = document.querySelectorAll(".move"), checkMove = document.querySelector(".check-move");
 let actionBtns = null;
+let countCard = 0;
 window.addEventListener("load", () => {
     let c = 0;
     if (localStorage.getItem("cart")) {
@@ -15,6 +16,53 @@ window.addEventListener("load", () => {
             carrousel.style.transition = "2s ease";
         }
     }, 1 * 100 * 30);
+    for (let i = 0; i < card.length; i++) {
+        checkMove.innerHTML += ` <div id='${i}' class='check'></div>`;
+    }
+    const buttons = document.querySelectorAll(".check");
+    buttons.forEach((e) => {
+        e.addEventListener('click', () => {
+            document.querySelectorAll(".check").forEach((ele) => {
+                ele.style.backgroundColor = "white";
+            });
+            e.style.backgroundColor = "#330f3c";
+            e.style.transition = "0.2s";
+            countCard = Number(e.id) * 20;
+            card.forEach((ele) => {
+                ele.style.transform = `translate(-${countCard}rem)`;
+                ele.style.transition = "2s ease";
+            });
+            countCard = 0;
+        });
+    });
+});
+moveBtns.forEach((e) => {
+    e.addEventListener("click", () => {
+        console.log(countCard);
+        if (e.id === "left") {
+            countCard -= 20;
+            card.forEach((ele) => {
+                ele.style.transform = `translate(${countCard}rem)`;
+                ele.style.transition = "2s ease";
+            });
+        }
+        else if (e.id === "right") {
+            if (countCard !== 0) {
+                countCard += 20;
+                card.forEach((ele) => {
+                    ele.style.transform = `translate(${countCard}rem)`;
+                    ele.style.transition = "2s ease";
+                });
+            }
+        }
+        if (countCard === (card.length * -20)) {
+            countCard = 0;
+            card.forEach((ele) => {
+                ele.style.transform = `translate(0%)`;
+                ele.style.transition = "2s ease";
+            });
+        }
+    });
 });
 shopCartBtn?.addEventListener('click', () => {
     actionBtns = document.querySelectorAll(".action");

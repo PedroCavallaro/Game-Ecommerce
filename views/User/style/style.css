@@ -103,7 +103,7 @@ td{
     text-align: center;
 }
 table {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     color: white;
     margin-top: 5px;
     border-collapse:collapse;

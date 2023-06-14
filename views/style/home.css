@@ -14,6 +14,7 @@ header {
 body {
   overflow-x: hidden;
   background: linear-gradient(to right, #5b0672, #033371);
+  height: 100rem;
 }
 #searchContainer {
   display: flex;
@@ -78,6 +79,7 @@ header > a > img {
     width: 100%;
 }
 .carrousel{
+    box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.75);
     display: flex;
     background-color: black;
     width: 70rem;
@@ -113,24 +115,23 @@ header > a > img {
     position: relative;
   
 }
-#carrousel-game-tittle{
-  position: absolute;
-  color:black;
-  z-index: 999;
-  font-size: 25px;
-  margin-left: 7px;
-  top:1rem;
-}
 .cod{
   visibility: hidden;
 }
-.products {
-    
+.products-container{
+
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80dvh;
+  margin-top: 2rem;
+}
+.products {
+  width: 60rem;
+  overflow: hidden;
+  display: flex;
   gap: 2rem;
+ 
 }
 .shop-cart-container{
     display: none;
@@ -228,6 +229,7 @@ header > a > img {
     top:-2rem;
 }
 .card {
+  margin-top: 6rem;
   flex-direction: column;
   width: 18rem;
   height: 25rem;
@@ -237,6 +239,12 @@ header > a > img {
   align-items: center;
   color: black;
   background-color: white;
+}
+.move-buttons{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .cover {
   position: relative;
@@ -282,9 +290,57 @@ header > a > img {
   color: #350741;
 }
 .arrow {
-    font-size: 2rem;
+  font-size: 2rem;
   cursor: pointer;
   height: 2rem;
   width: 2rem;
   margin-right: 2.3rem;
+}
+.check{
+  cursor: pointer;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 1rem ;
+  background-color: white;
+}
+.check-move{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:4px;
+}
+#left{
+  text-align: center;
+  padding-bottom: 3px;
+  cursor: pointer;
+  font-size: 24px;
+  background: none;
+  border: 2px solid;
+  width: 2.1rem;
+  border-radius: 1rem;
+  margin-left: 0.4rem;
+}
+.move-buttons > input[type="button"]{
+  color: white;
+}
+#right{
+  text-align: center;
+  padding-bottom: 3px;
+  cursor: pointer;
+  font-size: 24px;
+  font-display: white;
+  background: none;
+  border: 2px solid;
+  width: 2.1rem;
+  border-radius: 1rem;
+  margin-right: 0.4rem;
+}
+
+.move-buttons > input[type="button"]:hover{
+  color: black;
+  transition: 0.3s;
+}
+.check.selected{
+  background-color: #330f3c;
+  
 }
