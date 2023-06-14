@@ -6,99 +6,146 @@ const shopCartBtn: HTMLImageElement | null = document.querySelector("#shopCart")
     item: HTMLDivElement | null = document.querySelector(".item"),
     carrousel:HTMLDivElement | null = document.querySelector(".img-carrousel"),
     covers:NodeListOf<HTMLImageElement> = document.querySelectorAll(".i")
-    
-let c = 0;
-interface Product{
+    let actionBtns:any = null 
+
+export interface Product{
     cover: string,
     tittle: string,
     value: number,
     unityValue: number,
+    cod:string,
+    qtd: number
 }
 window.addEventListener("load", ()=>{
+    let c = 0;
     if(localStorage.getItem("cart")){
         updateCart(item);
     }
     setInterval(()=>{
-        c+= 50;
-        carrousel!.style.transform = `translate(-${c}%)`
+        c+= 70;
+        carrousel!.style.transform = `translate(-${c}rem)`
         carrousel!.style.transition = "2s ease"
-        if(c === (covers.length * 50)){
+        if(c === (covers.length * 70)){
             c = 0
             carrousel!.style.transform = `translate(0%)`
             carrousel!.style.transition = "2s ease"
         }
     }, 1 * 100 * 30)
+    
+
 })
-shopCartBtn?.addEventListener('click', ()=>{    
+shopCartBtn?.addEventListener('click', ()=>{
+    actionBtns = document.querySelectorAll(".action")
+    addAndDecrease(actionBtns)    
     shopCart?.classList.toggle("show")
 })
 closeCart?.addEventListener('click', ()=>{
-    shopCart?.classList.toggle("show")
-   
+     shopCart?.classList.toggle("show") 
 })
+
 
 add.forEach((e)=>{
     let arrProducts: Product[] = []
     e.addEventListener("click", ()=>{
+        shopCart?.classList.toggle("show")
+        const timer =setTimeout(() => {
+            shopCart?.classList.remove("show")
+            clearTimeout(timer)
+        }, 3000);
         const cover:any = e.parentElement?.childNodes[1].childNodes[1] ,
             tittle:any= e.parentElement?.childNodes[3],
-            value: any = e.parentElement?.childNodes[7].childNodes[1].childNodes[1].childNodes[3],
-            unity: any = e.parentElement?.childNodes[7].childNodes[1].childNodes[1].childNodes[3]
+            value: any = e.parentElement?.childNodes[9].childNodes[1].childNodes[1].childNodes[3],
+            unity: any = e.parentElement?.childNodes[9].childNodes[1].childNodes[1].childNodes[3],
+            cod: any = e.parentElement?.childNodes[5]
         
         const product : Product ={
             cover: cover.src,
             tittle: tittle.innerText,
             value: Number(value.innerText),
-            unityValue: Number(unity.innerText)
+            unityValue: Number(unity.innerText),
+            cod: cod.innerHTML,
+            qtd: 1
         }
-
-        if(localStorage.getItem("cart")){
-            arrProducts = JSON.parse(localStorage.getItem("cart") || '{}')  
-            console.log(arrProducts[0])
-            if(!(arrProducts.find((e)=> e.tittle == product.tittle))){
-                console.log("oi")
-
-                arrProducts.push(product)
-                localStorage.setItem("cart", JSON.stringify(arrProducts))
-                shopCart?.classList.toggle("show")
-               
-                const timer = setTimeout(() => {
-                    shopCart?.classList.remove("show")
-                    clearTimeout(timer)
-                        }, 3000);
-                updateCart(item)
-            }
-        }else{
-           const timer =setTimeout(() => {
-               shopCart?.classList.remove("show")
-                clearTimeout(timer)
-                }, 300);
+    if(localStorage.getItem("cart")){
+        arrProducts = JSON.parse(localStorage.getItem("cart") || "{}")
+        
+        if(!(arrProducts.find((ele)=> ele.tittle === product.tittle))){        
             arrProducts.push(product)
             localStorage.setItem("cart", JSON.stringify(arrProducts))
-       
-
+            updateCart(item)
+                    
+        }
+    }else{
+            arrProducts.push(product)
+            localStorage.setItem("cart", JSON.stringify(arrProducts))
+            updateCart(item)
         }
     })
 })
 function updateCart(div: HTMLDivElement | null){
+    let count = 0;
     div!.innerHTML = ""
-    let arrProducts: Product[] = []
+    let arrProducts: Product[] | null = []
     arrProducts = JSON.parse(localStorage.getItem("cart") || "{}")
 
-    arrProducts.forEach((e) =>{
-        div!.innerHTML += `
-        <div class='item-show'>
-            <img class="shop-cart-img"  src="${e.cover}" alt="">
-            <div class="info">
-                <p class="game-tittle-cart">${e.tittle}</p>
-                <div class="action-buttons">
-                    <input class="action m" type="button" value="+">
-                    <input class="action" type="button" value="0">
-                    <input class="action l" type="button" value="-">
+    arrProducts?.forEach((e) =>{
+        if(e.qtd > 0){
+
+            div!.innerHTML += `
+            <div class='item-show'>
+                <img class="shop-cart-img"  src="${e.cover}" alt="">
+                <div class="info">
+                    <p id="tittle${count}" class="game-tittle-cart">${e.tittle}</p>
+                    <div class="action-buttons">
+                        <input id="${count}" class="action m" type="button" value="+">
+                        <input class="action" type="button" value="${e.qtd}">
+                        <input id="${count}" class="action l" type="button" value="-">
+                    </div>
                 </div>
-            </div>
-        </div>`
+            </div>`
+            count++;
+        }
+        
+    })
+}
+function updateLs(productName: string, button:HTMLInputElement){
+    let arr: Product[] = []
+    arr = JSON.parse(localStorage.getItem("cart") || '{}')
+
+    arr.map((e)=>{
+        if(e.tittle == productName){
+            if(button.classList.contains("m")){
+                e.qtd += 1
+                e.value += e.unityValue
+            }else{
+                e.value -= e.unityValue
+                e.qtd -= 1
+            }
+            
+        }
+        const arr2 = arr.filter((e) => e.qtd !== 0)
+        localStorage.setItem("cart", JSON.stringify(arr2))
     })
 
-
+    localStorage.setItem("cart", JSON.stringify(arr))
+}
+function addAndDecrease(actionBtns:any[]){    
+    actionBtns.forEach((e)=>{
+        const qtd:any = e.parentElement?.childNodes[3]
+        const name = document.querySelector(("#tittle" + e.id)) 
+        e.addEventListener('click', ()=>{
+            
+            if(e.classList.contains("m")){
+                qtd.value = Number(qtd.value) + 1 
+                updateLs(name!.innerHTML, e)
+            }
+            else if(e.classList.contains("l")){
+                if(qtd.value != 0){
+                    qtd.value = Number(qtd.value) - 1 
+                    updateLs(name!.innerHTML, e)  
+                }
+            }
+        })
+    })
+   
 }

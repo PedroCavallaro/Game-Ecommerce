@@ -1,0 +1,153 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#user-img{
+    margin-right: 3rem;
+}
+form{
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+.left{
+    border-left: none;
+}
+.right{
+    border-right: none;
+}
+section{
+    border-left: 1px solid black ;
+    border-right:1px solid black ;
+    /* height: 100dvh; */
+    color: white;
+    background-color:#430555;
+    margin-top: 2rem ;
+    display: flex;
+   
+    flex-direction: column;
+}
+.total-price{
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.total-price > p {
+    font-size: 1.7rem;
+}
+#value{
+    margin-left: 5px;
+    font-size: 2rem;
+    color: #70319d;
+}
+.left{
+    margin-left: 2rem;
+}
+.product-img{
+    height: 7rem;
+    width: 5rem;
+    object-fit: cover;
+}
+.items-cart-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.items-cart{
+    border-top: 1px solid black;
+    
+}
+.items-cart > div{
+    padding: 0.5rem;
+    display: flex;
+}
+.prod-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 1rem;
+}
+.middle{
+    width: 30rem;
+}
+.payment-img{
+    width: 3rem;
+    height: 3rem;
+}
+#head-middle{
+    padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.payment-methods{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.payment-methods > label{
+    border-radius: 1rem;
+    width: 20rem;
+    border: 2px solid black;
+    margin-top: 2rem;
+    cursor: pointer;
+    display: flex;
+}
+.payment-methods > label > p{
+    margin-left: 1rem;
+}
+.payment-methods > label:hover{
+    border: 2px solid black;
+    background-color: black;
+    transition: 1s;
+}
+.payment-methods > label.selected{
+    border: 2px solid black;
+    background-color: black;
+    transition: 1s;
+}
+.payment-label{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}
+.shipment-info{
+    padding-top: 0.2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.inputs{
+    margin-top: 0.6rem;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+.inputs > input[type="text"]{
+    border: none;
+    background-color: #70319d;
+    color: white;
+    outline: none;
+    height:2.3rem;
+    font-size: 15px;
+}
+.pay{
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.pay > input[type="submit"]{
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    width: 15rem;
+    height: 3rem;
+    background-color: #5a166d;
+    border: none;
+}
+input[type="submit"]:hover{
+    background-color: #552263;
+    transition: 0.5s ease;
+}

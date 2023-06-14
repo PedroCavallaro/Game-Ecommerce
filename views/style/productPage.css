@@ -43,11 +43,16 @@
     height: 2rem;
     width: 2re;
 }
+#cod{
+    visibility: hidden;
+    position: absolute;
+}
 .top-info{
     display: flex;
     justify-content: space-between;
 }
 #product-label{
+    text-decoration: none;
     font-size: 20px;
     cursor: pointer;
     width: 10rem;
@@ -64,10 +69,14 @@
     background-color: #4e0961;
     transition: 1s;
 }
-#value{
+.value-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #5f1075;
-    font-size: 2rem;
+    font-size: 1.4rem;
 }
+
 #desc{
     font-size: 18px;
     margin-top: 4rem;

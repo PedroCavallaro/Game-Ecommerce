@@ -57,7 +57,7 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
             <div class="item">
             </div>
             <div class="go-to-payment">
-                <a href="">
+                <a href="./payment.php?username=<?=$username?>">
                     <input type="button" value="ir para pagamento">
                 </a>
             </div>
@@ -82,7 +82,7 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
             $c = count($gamesFound);
        
             for ($i=0; $i < $c; $i++) { 
-                searchProduct($gamesFound[$i]);
+                searchProduct($gamesFound[$i],$username);
                 
             }
             $user = $_SESSION["user"];
@@ -97,6 +97,6 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
         ?>
         </section>
     </main>
-    <script src="./dist/home.js"></script>
+    <script type="module" src="./dist/home.js"></script>
 </body>
 </html>
