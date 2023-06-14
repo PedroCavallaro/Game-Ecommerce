@@ -29,6 +29,11 @@ body{
     height: 6rem;
 }
 .previous-buys{
+    font: 2rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 2rem;
     margin-left: 1rem;
 }
@@ -93,4 +98,49 @@ input[type="text"].edit{
 .fields{
     display: flex;
     flex-direction: column;
+}
+td{ 
+    text-align: center;
+}
+table {
+    border: 2px solid black;
+    color: white;
+    margin-top: 5px;
+    border-collapse:collapse;
+    width: 100%;
+    background-color: #fff;
+}
+th{
+    border: none;
+    background-color:#541565; 
+    height: 2rem;
+    cursor: default;
+}
+th:hover{
+    background-color:#430555;
+    transition: 1s ease;
+}
+table tr:nth-child(odd){
+    border-collapse: collapse;
+    background-color: #430555
+}
+
+table tr:nth-child(even){
+    border-collapse: collapse;
+    background-color:#8b479e; 
+}
+td{
+    height: 6rem;
+    cursor: default;
+}
+
+table tr:nth-child(odd):hover{
+    border-collapse: collapse;
+    background-color: #32054f;
+    transition: 1s ease;
+}
+table tr:nth-child(even):hover{
+    border-collapse: collapse;
+    background-color: #32054f;
+    transition: 1s ease;
 }

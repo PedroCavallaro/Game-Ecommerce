@@ -1,5 +1,4 @@
 const previews = document.querySelectorAll(".img"), mainImg = document.querySelector(".main-img"), shopCartp = document.querySelector(".shop-cart-container"), closeCartp = document.querySelector("#arrow-left"), shopCartBtnp = document.querySelector("#shopCart"), itemp = document.querySelector(".item"), buyBtn = document.querySelector("#product-label"), value = document.querySelector("#value"), tittle = document.querySelector("#tittle"), cod = document.querySelector("#cod"), cover = document.querySelector(".main-img");
-console.log(value?.innerText);
 window.addEventListener("load", () => {
     updateCart(itemp);
 });

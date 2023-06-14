@@ -42,7 +42,19 @@ $id = $_SESSION["user"];
             <h3>Minhas compras</h3>
         </div>
         <div>
-            
+            <table>
+                <thead>
+                    <th>Numero da compra</th>
+                    <th>Produtos</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Vendedor</th>
+                    <th>Transportadora</th>
+                </thead>
+                <tbody>
+                    <?=renderPreviousBuys($id)?>
+                </tbody>
+            </table>
         </div>
     </main>
     <script src="../dist/user.js"></script>

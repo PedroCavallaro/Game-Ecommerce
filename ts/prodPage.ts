@@ -12,7 +12,7 @@ const previews:NodeListOf<HTMLImageElement> = document.querySelectorAll(".img"),
     cod: HTMLParagraphElement | null = document.querySelector("#cod"),
     cover: HTMLImageElement | null = document.querySelector(".main-img")
 
-console.log(value?.innerText)
+
 
 
 window.addEventListener("load", ()=>{

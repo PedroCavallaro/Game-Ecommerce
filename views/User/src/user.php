@@ -87,3 +87,58 @@ function renderInfo($id){
                 </div>
             </div>";
     }
+function renderPreviousBuys($id){
+    $bd = connect();
+    $tittles = "";
+    $qtd = "";
+    $arrBuys = [];
+    $sql = "SELECT c.numero_compra,
+                c.valor_transporte,
+                v.nome_vend,
+                t.nome_tras
+                FROM compra c
+                INNER JOIN vendedor v
+                    ON c.cpf_cnpj_vend = v.cpf_cnpj_vend
+                INNER JOIN transportadora t 
+                    ON c.cpf_cnpj_transp = t.cpf_cnpj_transp
+                WHERE c.cpf_cnpj_cli = $id";
+
+
+    $html = "";
+    $TransArr = [];
+    $vendArr = [];
+    $valueArr = [];
+    $result = $bd->query($sql);
+    while($data = $result->fetch(PDO::FETCH_ASSOC)){
+        array_push($arrBuys, $data["numero_compra"]);
+        array_push($TransArr, $data["nome_tras"]);
+        array_push($vendArr, $data["nome_vend"]);
+        array_push($valueArr, $data["valor_transporte"]);
+    }
+    
+    for ($i=0; $i < count($arrBuys) ; $i++) { 
+        $sql2 = "SELECT p.quantidade,
+                    prod.nome_pro
+                    FROM possui p
+                    INNER JOIN produto prod 
+                        ON p.codigo_prod = prod.codigo_prod 
+                    WHERE numero_compra = ".$arrBuys[$i]."";
+        $result2 = $bd->query($sql2);
+
+        while($data2 = $result2->fetch(PDO::FETCH_ASSOC)){
+            $tittles = $tittles."<p>".$data2["nome_pro"]."</p>";
+            $qtd = $qtd."<p>".$data2["quantidade"]."x</p>";
+        }
+        echo "<tr>
+        
+                <td>".$arrBuys[$i]."</td>
+                <td>".$tittles."</td>
+                <td>".$qtd."</td>
+                <td>".$valueArr[$i]."</td>
+                <td>".$vendArr[$i]."</td>
+                <td>".$TransArr[$i]."</td>
+            <tr/>";
+        $tittles = "";
+        $qtd = "";
+    }
+}
