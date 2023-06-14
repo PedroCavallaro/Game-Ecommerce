@@ -121,6 +121,9 @@ header > a > img {
   margin-left: 7px;
   top:1rem;
 }
+.cod{
+  visibility: hidden;
+}
 .products {
     
   display: flex;

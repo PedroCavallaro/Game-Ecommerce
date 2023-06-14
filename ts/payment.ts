@@ -1,18 +1,20 @@
+import { Product } from "./home.js"
 const left: HTMLDivElement | null = document.querySelector(".left"),
      middle: HTMLDivElement | null = document.querySelector(".middle"),
      right: HTMLDivElement | null = document.querySelector(".right"),
      itensContainer: HTMLDivElement | null = document.querySelector(".items-cart-container"),
      cardLabels: NodeListOf<HTMLLabelElement> = document.querySelectorAll(".payment-methods > label"),
-     totalValue: HTMLHeadingElement | null = document.querySelector("#value")
+     totalValue: HTMLHeadingElement | null = document.querySelector("#value"),
+     pay: HTMLInputElement | null = document.querySelector(".pay > input[type='submit']")
 
-interface Product{
-    cover: string,
-    tittle: string,
-    value: number,
-    unityValue: number,
-    qtd: number
-}
+
 window.addEventListener("load", ()=>{
+    const url = new URLSearchParams(window.location.href)
+
+    if(url.get("s")){
+        localStorage.removeItem("cart")
+    }else{
+        
     let arrProducts:Product[] = [] 
     arrProducts =  JSON.parse(localStorage.getItem("cart") || '{}') 
 
@@ -37,7 +39,9 @@ window.addEventListener("load", ()=>{
         }
     })
     totalValue!.innerText = "R$" + String(count)
+    }
 })  
+
 cardLabels.forEach((e) => {
     e.addEventListener('click', ()=>{
 
@@ -48,3 +52,31 @@ cardLabels.forEach((e) => {
         e.classList.toggle("selected")
     })
 })
+
+pay?.addEventListener('click', ()=>{
+    let arr:Product[] = []
+    arr = JSON.parse(localStorage.getItem("cart") || '{}')
+    let cod = ""
+    let qtd = ""
+    let total = 0
+    let value = ""
+    arr.forEach((e)=>{
+        cod += "," + e.cod 
+        qtd += "," + e.qtd
+        value += "," + e.value;
+        total += Number(e.value)
+    })
+    
+    setCookie("buy", cod, 2)
+    setCookie("qtd", qtd, 2)
+    setCookie("total", String(total), 2)
+    setCookie("unity", String(value), 2)
+})
+
+
+function setCookie(cname:string, cvalue:string, exdays:number) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }

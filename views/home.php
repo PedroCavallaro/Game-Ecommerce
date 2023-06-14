@@ -97,6 +97,6 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
         ?>
         </section>
     </main>
-    <script src="./dist/home.js"></script>
+    <script type="module" src="./dist/home.js"></script>
 </body>
 </html>

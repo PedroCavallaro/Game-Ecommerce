@@ -27,7 +27,7 @@ $id = $_SESSION["user"];
             <h1><?=$username?></h1>
         </div>
 
-        <form class="user-section" action="./src/update.php" method="POST">
+        <form class="user-section" action="./src/update.php?username=<?=$username?>&id=<?=$id?>" method="POST">
             <div id="edit">
                 <img src="../../assets/pencil.png" alt="">
             </div>

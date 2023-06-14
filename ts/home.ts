@@ -6,14 +6,14 @@ const shopCartBtn: HTMLImageElement | null = document.querySelector("#shopCart")
     item: HTMLDivElement | null = document.querySelector(".item"),
     carrousel:HTMLDivElement | null = document.querySelector(".img-carrousel"),
     covers:NodeListOf<HTMLImageElement> = document.querySelectorAll(".i")
-  
-    
+    let actionBtns:any = null 
 
-interface Product{
+export interface Product{
     cover: string,
     tittle: string,
     value: number,
     unityValue: number,
+    cod:string,
     qtd: number
 }
 window.addEventListener("load", ()=>{
@@ -31,14 +31,16 @@ window.addEventListener("load", ()=>{
             carrousel!.style.transition = "2s ease"
         }
     }, 1 * 100 * 30)
-    addAndDecrease()
+    
 
 })
-shopCartBtn?.addEventListener('click', ()=>{    
+shopCartBtn?.addEventListener('click', ()=>{
+    actionBtns = document.querySelectorAll(".action")
+    addAndDecrease(actionBtns)    
     shopCart?.classList.toggle("show")
 })
 closeCart?.addEventListener('click', ()=>{
-    shopCart?.classList.toggle("show") 
+     shopCart?.classList.toggle("show") 
 })
 
 
@@ -52,53 +54,57 @@ add.forEach((e)=>{
         }, 3000);
         const cover:any = e.parentElement?.childNodes[1].childNodes[1] ,
             tittle:any= e.parentElement?.childNodes[3],
-            value: any = e.parentElement?.childNodes[7].childNodes[1].childNodes[1].childNodes[3],
-            unity: any = e.parentElement?.childNodes[7].childNodes[1].childNodes[1].childNodes[3]
+            value: any = e.parentElement?.childNodes[9].childNodes[1].childNodes[1].childNodes[3],
+            unity: any = e.parentElement?.childNodes[9].childNodes[1].childNodes[1].childNodes[3],
+            cod: any = e.parentElement?.childNodes[5]
         
         const product : Product ={
             cover: cover.src,
             tittle: tittle.innerText,
             value: Number(value.innerText),
             unityValue: Number(unity.innerText),
+            cod: cod.innerHTML,
             qtd: 1
         }
-
-        if(localStorage.getItem("cart")){
-            arrProducts = JSON.parse(localStorage.getItem("cart") || '{}')  
-            if(!(arrProducts.find((e)=> e.tittle == product.tittle))){  
-                arrProducts.push(product)
-                localStorage.setItem("cart", JSON.stringify(arrProducts))
-                updateCart(item)
-            }
-        }else{
+    if(localStorage.getItem("cart")){
+        arrProducts = JSON.parse(localStorage.getItem("cart") || "{}")
+        
+        if(!(arrProducts.find((ele)=> ele.tittle === product.tittle))){        
             arrProducts.push(product)
             localStorage.setItem("cart", JSON.stringify(arrProducts))
             updateCart(item)
-            
+                    
         }
-        addAndDecrease()
+    }else{
+            arrProducts.push(product)
+            localStorage.setItem("cart", JSON.stringify(arrProducts))
+            updateCart(item)
+        }
     })
 })
 function updateCart(div: HTMLDivElement | null){
     let count = 0;
     div!.innerHTML = ""
-    let arrProducts: Product[] = []
+    let arrProducts: Product[] | null = []
     arrProducts = JSON.parse(localStorage.getItem("cart") || "{}")
 
-    arrProducts.forEach((e) =>{
-        div!.innerHTML += `
-        <div class='item-show'>
-            <img class="shop-cart-img"  src="${e.cover}" alt="">
-            <div class="info">
-                <p id="tittle${count}" class="game-tittle-cart">${e.tittle}</p>
-                <div class="action-buttons">
-                    <input id="${count}" class="action m" type="button" value="+">
-                    <input class="action" type="button" value="${e.qtd}">
-                    <input id="${count}" class="action l" type="button" value="-">
+    arrProducts?.forEach((e) =>{
+        if(e.qtd > 0){
+
+            div!.innerHTML += `
+            <div class='item-show'>
+                <img class="shop-cart-img"  src="${e.cover}" alt="">
+                <div class="info">
+                    <p id="tittle${count}" class="game-tittle-cart">${e.tittle}</p>
+                    <div class="action-buttons">
+                        <input id="${count}" class="action m" type="button" value="+">
+                        <input class="action" type="button" value="${e.qtd}">
+                        <input id="${count}" class="action l" type="button" value="-">
+                    </div>
                 </div>
-            </div>
-        </div>`
-        count++;
+            </div>`
+            count++;
+        }
         
     })
 }
@@ -117,13 +123,13 @@ function updateLs(productName: string, button:HTMLInputElement){
             }
             
         }
+        const arr2 = arr.filter((e) => e.qtd !== 0)
+        localStorage.setItem("cart", JSON.stringify(arr2))
     })
 
     localStorage.setItem("cart", JSON.stringify(arr))
 }
-function addAndDecrease(){
-    const actionBtns: NodeListOf<HTMLInputElement> = document.querySelectorAll(".action")
-    
+function addAndDecrease(actionBtns:any[]){    
     actionBtns.forEach((e)=>{
         const qtd:any = e.parentElement?.childNodes[3]
         const name = document.querySelector(("#tittle" + e.id)) 
@@ -141,4 +147,5 @@ function addAndDecrease(){
             }
         })
     })
+   
 }

@@ -3,7 +3,6 @@ include_once "../src/Product/products.php";
 $username = $_GET["username"];
 
 session_start();
-
 $id = $_SESSION["user"]
 
 ?>
@@ -33,7 +32,7 @@ $id = $_SESSION["user"]
             </form>
         </div>
         <div class="user-section">
-            <div id="user-img">
+            <div>
                 <a  href="User/user.php?username=<?=$username?>">
                     <img  class="headerImg" src="../assets/user.png" alt="userIcon">
                 </a>
@@ -41,11 +40,11 @@ $id = $_SESSION["user"]
             </div>
         </div>
     </header>
-    <form action="" method="POST">
+    <form action="../src/finish.php?username=<?=$username?>&id=<?=$id?>" method="POST">
         <section class="left">
             <div class="total-price">
                 <p>Total:</p>
-                <h2 id="value"> 2350</h2>
+                <h2 id="value"></h2>
             </div>
            <div class="items-cart-container">
 
@@ -73,10 +72,9 @@ $id = $_SESSION["user"]
                     <div class="pay">
                         <input type="submit" value="Finalizar">
                     </div>
-                </form>
-            </div>  
-        </section>
-    </form>
-    <script src="./dist/payment.js"></script>
+                </div>  
+            </section>
+        </form>
+    <script  type="module" src="./dist/payment.js"></script>
 </body>
 </html>

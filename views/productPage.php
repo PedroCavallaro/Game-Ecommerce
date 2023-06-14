@@ -43,11 +43,22 @@ $username = filter_input(INPUT_GET, "username", FILTER_SANITIZE_SPECIAL_CHARS);
         </div>
     </header>
   <main>
+    <div class="shop-cart-container"> 
+                <p id="arrow-left" class="arrow">></p>
+                <!-- <img id="arrow-left" class="arrow" src="../assets/arrow-rigth.png" alt=""> -->
+                <div class="item">
+                </div>
+                <div class="go-to-payment">
+                    <a href="./payment.php?username=<?=$username?>">
+                        <input type="button" value="ir para pagamento">
+                    </a>
+                </div>
+            </div>
       <section class="product-section">
          <?=renderProduct($idProd)?>
       </section>
   </main>
-  <script src="./dist/prodPage.js"></script>
 </body>
+<script type="module" src="./dist/prodPage.js"></script>
 
 </html>

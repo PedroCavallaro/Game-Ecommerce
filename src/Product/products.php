@@ -24,6 +24,7 @@ function getProducts($username)
                     <img  src='../covers/" . $data['nome_arquivo'] . "' alt=''>
                 </div>
                <h3 class='gameTitle'>" . $data["nome_pro"] . "</h3>
+               <p class='cod'>".$data["codigo_prod"]."</p>
                <img role='button' draggable='false' class='add' src='../assets/add-to-cart.png'>
                 <div class='info'>
                     <div class='price-info'>
@@ -77,7 +78,7 @@ function renderProduct($id)
 
   $result = $bd->query($sql);
   $img = [];
-
+  $username = $_GET["username"]; 
   for ($i = 0; $i < 3; $i++) {
     $data = $result->fetch(PDO::FETCH_ASSOC);
     if (!isset($data["nome_arquivo"])) {
@@ -95,6 +96,7 @@ function renderProduct($id)
 
       echo " 
             <div class='poduct-main-container'>
+            <p id='cod'>".$data["codigo_prod"]."</p>
             <aside class='preview'>
                 <div class='background'>
                     <img class='preview-img img' src='../covers/" . $img[2] . "' alt=''>
@@ -108,14 +110,19 @@ function renderProduct($id)
                   </div>
                   <div class='product-info'>
                         <div class='top-info'>
-                              <h2 id='value'>R$" . $data["valor_unitario"] . "</h2>
-                              <label id='product-label' for='add-to-cart'>
-                              <img id='shop-cart' src='../assets/shopcart.png' alt=''>
-                              <p>Comprar</p>  
+                            <div class='value-info'>
+                                <h2>R$</h2>
+                                <h2 id='value'>" . $data["valor_unitario"] . "</h2>
+                            </div>
+                              <label id='go-to' for='add-to-cart'>
+                                <a href='./payment.php?username=$username' id='product-label'>
+                                    <img id='shop-cart' src='../assets/shopcart.png' alt=''>
+                                    <p>Comprar</p>  
+                                </a>
                             </label>
                             </div>
                         <div class='product-desc'>
-                            <h2 >" . $data["nome_pro"] . "</h2>
+                            <h2 id='tittle' >" . $data["nome_pro"] . "</h2>
                             <p id='desc'>" . $data["descricao"] . "</p>
                         </div>
                       </div>";
@@ -138,24 +145,26 @@ function searchProduct($cod, $username)
 
 
       echo "<div class='card'>
-                    <div class='cover'>
-                        <img  src='../covers/" . $data['nome_arquivo'] . "' alt=''>
+                <div class='cover'>
+                    <img  src='../covers/" . $data['nome_arquivo'] . "' alt=''>
+                </div>
+               <h3 class='gameTitle'>" . $data["nome_pro"] . "</h3>
+               <p class='cod'>".$data["codigo_prod"]."</p> 
+               <div class='info'>
+                    <div class='price-info'>
+                        <div>
+                            <p class='cod'>".$data["codigo_prod"]."</p>
+                            <h3 class='price'>Valor</h3>
+                            <h3 class='price unity'>" . $data["valor_unitario"] . "</h3>
+                        </div>
+                        <label for=''>
+                           <a href='./productPage.php?username=$username&id=" . $data["codigo_prod"] . "' >
+                               <img class='arrow' src='../assets/arrow-rigth.png' alt=''>
+                           </a>
+                        </label>
                     </div>
-                    <h3 class='gameTitle'>" . $data["nome_pro"] . "</h3>
-                    <div class='info'>
-                        <div class='price-info'>
-                            <div>
-                                <h3 class='price'>Valor</h3>
-                                <h3 class='price'>R$ " . $data["valor_unitario"] . "</h3>
-                            </div> 
-                            <label for=''>
-                                <a href='./productPage.php?username=$username&id=$cod'>
-                                    <img class='arrow' src='../assets/arrow-rigth.png' alt=''>
-                                </a>
-                            </label>
-                        </div>
-                        </div>
-                    </div>";
+                </div>
+            </div>";
   }
 }
 function shipmentInfo($id){
