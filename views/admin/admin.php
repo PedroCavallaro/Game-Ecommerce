@@ -40,8 +40,10 @@ $result = $bd->query($sql);
 <body>
 
   <?php
-  if ($idErro) {
+  if ($idErro == 1) {
     echo "<p>Erro ao cadastrar produto!</p>";
+  } elseif ($idErro == 2) {
+    echo "<p>Erro ao deletar produto!</p>";
   }
   ?>
 
@@ -77,8 +79,8 @@ $result = $bd->query($sql);
               <td>" . $data["dimensoes"] . "</td>
               <td>" . $data["unidade_Venda"] . "</td>
               <td>
-                <a href='excluirProd.php?id=" . $data["codigo_prod"] . "'>Editar</a>
-                <a href='editarProd.php?id=" . $data["codigo_prod"] . "'>Excluir</a>
+                <a href='excluirProd.php?id=" . $data["codigo_prod"] . "'>Excluir</a>
+                <a href='editarProd.php?id=" . $data["codigo_prod"] . "'>Editar</a>
               </td>
             </tr>
           ";

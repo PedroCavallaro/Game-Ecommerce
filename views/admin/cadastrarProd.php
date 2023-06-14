@@ -49,7 +49,7 @@ $unidade_venda = $_POST["unidade_venda"] ?? 0;
 
     <label for="peso">
       Peso
-      <input type="number" step="0.01" id="peso" name="peso">
+      <input type="text" id="peso" name="peso">
     </label>
 
     <label for="dimensoes">
@@ -62,14 +62,17 @@ $unidade_venda = $_POST["unidade_venda"] ?? 0;
       <input type="number" id="unidade_venda" name="unidade_venda">
     </label>
 
-    <label for="img">
+    <label for="choose-file">
       Imagens
-      <input type="file" name="imagem[]" accept="image/*" multiple><br>
+      <div id="img-preview"></div>
+      <input type="file" id="choose-file" name="imagem[]" accept="image/*" multiple><br>
     </label>
 
     <input type="submit" value="Cadastrar">
   </form>
 </body>
+
+<script src="../dist/imagePreview.js"></script>
 
 </html>
 
