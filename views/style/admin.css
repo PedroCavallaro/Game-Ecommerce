@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+  background: linear-gradient(to right, #5b0672, #033371);
+  color: #c0bfbf;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  float: right;
+}
+
+.btn > button {
+  margin-right: 20px;
+  padding: 5px;
+  width: auto;
+  height: 2rem;
+  border: 2px solid black;
+  border-radius: 7px;
+  background-color: darkslateblue;
+  color: #c0bfbf;
+  text-transform: uppercase;
+}
+
+.btn > button:hover {
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7rem;
+}
+
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-bottom: 6px;
+}
+
+td {
+  text-align: center;
+  padding: 7px;
+  border: 1px solid #fff;
+  min-width: 120px;
+  height: 18px;
+}
+
+td > a {
+  color: burlywood;
+  text-transform: uppercase;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+label > input {
+  width: auto;
+  height: 2rem;
+  font-size: medium;
+}
+
+textarea {
+  resize: none;
+  font-size: medium;
+}
+
+#img-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#choose-file {
+  width: 100%;
+  height: 100%;
+}
+#choose-file:hover {
+  cursor: pointer;
+}
+
+img {
+  width: 15rem;
+  height: 15rem;
+}
+
+input[type="submit"] {
+  margin-right: 20px;
+  padding: 5px;
+  width: auto;
+  height: 2rem;
+  border: 2px solid black;
+  border-radius: 7px;
+  background-color: darkslateblue;
+  color: #c0bfbf;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+}

@@ -35,32 +35,27 @@ if ($cod && $nome && $descricao && $valor_unitario && $quantidade && $peso && $d
 
   $diretorioDestino = "../../covers/";
 
-  for ($i = 0; $i < count($_FILES['imagem']['name']); $i++) {
-    if ($_FILES['imagem']['error'][$i] == UPLOAD_ERR_OK) {
-      $nomeArquivo = $_FILES['imagem']['name'][$i];
-      $caminhoArquivo = $diretorioDestino . $nomeArquivo;
+  if (isset($_FILES['imagem'])) {
+    for ($i = 0; $i < count($_FILES['imagem']['name']); $i++) {
+      if ($_FILES['imagem']['error'][$i] == UPLOAD_ERR_OK) {
+        $nomeArquivo = $_FILES['imagem']['name'][$i];
+        $caminhoArquivo = $diretorioDestino . $nomeArquivo;
 
-      $sql2 = "INSERT INTO imagem(codigo_prod, nome_arquivo) VALUES ('" . $cod . "','" . $nomeArquivo . "')";
-      try {
-        $bd->query($sql2);
-      } catch (Exception $e) {
-        echo "Erro $e";
+        $sql2 = "INSERT INTO imagem(codigo_prod, nome_arquivo) VALUES ('" . $cod . "','" . $nomeArquivo . "')";
+
+        try {
+          $bd->query($sql2);
+        } catch (Exception $e) {
+          header("location:admin.php?err=3");
+        }
+
+        move_uploaded_file($_FILES['imagem']['tmp_name'][$i], $caminhoArquivo);
+      } else {
+        header("location:admin.php?err=3");
       }
-
-      move_uploaded_file($_FILES['imagem']['tmp_name'][$i], $caminhoArquivo);
-    } else {
-      header("location:admin.php?err=3");
     }
+    header("location:admin.php");
+  } else {
+    header("location:admin.php?err=3");
   }
-
-  header("location:admin.php");
-} else {
-  var_dump($cod);
-  var_dump($nome);
-  var_dump($descricao);
-  var_dump($valor_unitario);
-  var_dump($quantidade);
-  var_dump($peso);
-  var_dump($dimensoes);
-  var_dump($unidade_Venda);
 }

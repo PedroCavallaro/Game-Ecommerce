@@ -35,6 +35,8 @@ $result = $bd->query($sql);
   <meta charset="UTF-8">
   <meta name="viewport" content="widtr=device-widtr, initial-scale=1.0">
   <title>Painel Admin</title>
+  <link rel="stylesheet" href="../style/font.css">
+  <link rel="stylesheet" href="../style/admin.css">
 </head>
 
 <body>
@@ -44,16 +46,18 @@ $result = $bd->query($sql);
     echo "<p>Erro ao cadastrar produto!</p>";
   } elseif ($idErro == 2) {
     echo "<p>Erro ao deletar produto!</p>";
+  } elseif ($idErro == 3) {
+    echo "<p>Erro ao atualizar produto!</p>";
   }
   ?>
 
   <h1>Painel Gerencial dos Produtos</h1>
 
-  <a href="cadastrarProd.php">
+  <a class="btn" href="cadastrarProd.php">
     <button>Cadastrar Novo Produto</button>
   </a>
 
-  <div>
+  <div class="main">
     <table>
       <tr>
         <th>Código</th>

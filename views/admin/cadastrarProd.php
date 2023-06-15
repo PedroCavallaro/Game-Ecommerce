@@ -16,6 +16,8 @@ $unidade_venda = $_POST["unidade_venda"] ?? 0;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastrar Novo Produto</title>
+  <link rel="stylesheet" href="../style/font.css">
+  <link rel="stylesheet" href="../style/admin.css">
 </head>
 
 <body>
@@ -100,24 +102,45 @@ if ($cod && $nome && $descricao && $valor_unitario && $quantidade && $peso && $d
 
   $diretorioDestino = "../../covers/";
 
-  for ($i = 0; $i < count($_FILES['imagem']['name']); $i++) {
-    if ($_FILES['imagem']['error'][$i] == UPLOAD_ERR_OK) {
-      $nomeArquivo = $_FILES['imagem']['name'][$i];
-      $caminhoArquivo = $diretorioDestino . $nomeArquivo;
+  $nomeImagens = [];
 
-      $sql2 = "INSERT INTO imagem(codigo_prod, nome_arquivo) VALUES ('" . $cod . "','" . $nomeArquivo . "')";
-      try {
-        $bd->query($sql2);
-      } catch (Exception $e) {
-        echo "Erro $e";
+  if (isset($_FILES['imagem'])) {
+    for ($i = 0; $i < count($_FILES['imagem']['name']); $i++) {
+      if ($_FILES['imagem']['error'][$i] == UPLOAD_ERR_OK) {
+        $nomeArquivo = $_FILES['imagem']['name'][$i];
+        $caminhoArquivo = $diretorioDestino . $nomeArquivo;
+
+        $nomeImagens[$i] = $nomeArquivo;
+
+        move_uploaded_file($_FILES['imagem']['tmp_name'][$i], $caminhoArquivo);
+      } else {
+        header("location:admin.php?err=1");
+      }
+    }
+
+    if (!empty($nomeImagens)) {
+      foreach ($nomeImagens as $pathArq) {
+        $sql2 = "INSERT INTO imagem(codigo_prod, nome_arquivo) VALUES ('" . $cod . "','" . $pathArq . "')";
+
+        echo "$sql2 <br>";
+
+        try {
+          $bd->query($sql2);
+          echo "deu <br>";
+          continue;
+        } catch (Exception $e) {
+          echo "$e";
+        }
       }
 
-      move_uploaded_file($_FILES['imagem']['tmp_name'][$i], $caminhoArquivo);
+      header("Location: admin.php");
+      exit();
     } else {
-      header("location:admin.php?err=1");
+      header("Location: admin.php?err=1");
+      exit();
     }
+  } else {
+    header("location:admin.php?err=1");
   }
-
-  header("location:admin.php");
 }
 ?>

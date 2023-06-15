@@ -40,6 +40,8 @@ $unidade_Venda = $_POST["unidade_Venda"] ?? 0;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editar Produto</title>
+  <link rel="stylesheet" href="../style/font.css">
+  <link rel="stylesheet" href="../style/admin.css">
 </head>
 
 <body>
@@ -73,7 +75,7 @@ $unidade_Venda = $_POST["unidade_Venda"] ?? 0;
         <div id="img-preview">
           <?= loadImages($bd, $idProd) ?>
         </div>
-        <input type="file" id="choose-file" name="imagem[]" accept="image/*" multiple><br>
+        <input type="file" id="choose-file" name="imagem[]" accept="image/*" multiple>
       </div>
     </label>
 
