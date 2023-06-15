@@ -301,7 +301,8 @@ header > a > img {
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 1rem ;
-  background-color: white;
+  background: none;
+  border: 1px solid white;
 }
 .check-move{
   display: flex;
@@ -315,7 +316,7 @@ header > a > img {
   cursor: pointer;
   font-size: 24px;
   background: none;
-  border: 2px solid;
+  border: 1px solid;
   width: 2.1rem;
   border-radius: 1rem;
   margin-left: 0.4rem;
@@ -330,7 +331,7 @@ header > a > img {
   font-size: 24px;
   font-display: white;
   background: none;
-  border: 2px solid;
+  border: 1px solid;
   width: 2.1rem;
   border-radius: 1rem;
   margin-right: 0.4rem;
