@@ -1,6 +1,8 @@
 *{
     margin: 0;
     padding: 0;
+    overflow: hidden;
+
 }
 #user-img{
     margin-right: 3rem;
@@ -150,4 +152,42 @@ section{
 input[type="submit"]:hover{
     background-color: #552263;
     transition: 0.5s ease;
+}
+.modal-container{
+    display: none;
+}
+.modal-container.show{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100dvw;
+    height: 100dvh;
+
+}
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40rem;
+    height:25rem;
+    gap: 2rem;
+    border: 2px solid black;
+    color: white;
+    background-color:#430555;
+    animation: modal 1s;
+    position: relative;
+    opacity: 1; 
+
+}
+.modal > p > a {
+    color: #70319d;
+}
+@keyframes modal{
+    0%{
+        top: -10rem
+    }100%{
+        top:0   
+    }
 }

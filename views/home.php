@@ -74,28 +74,36 @@ $search =  isset($_GET["search"]) ? $_GET["search"] : "";
                 </div>";
             }
         ?>
+        <section class="products-container">
+            <section class="products">
+            <?php
         
-        <section class="products">
-        <?php
-       
-        if($gamesFound != ""){
-            $c = count($gamesFound);
-       
-            for ($i=0; $i < $c; $i++) { 
-                searchProduct($gamesFound[$i],$username);
-                
+            if($gamesFound != ""){
+                $c = count($gamesFound);
+        
+                for ($i=0; $i < $c; $i++) { 
+                    searchProduct($gamesFound[$i],$username);
+                    
+                }
+                $user = $_SESSION["user"];
+                session_destroy();
+                session_start();
+                $_SESSION["user"] = $user;
+        
+            }else{
+            echo getProducts($username);
             }
-            $user = $_SESSION["user"];
-            session_destroy();
-            session_start();
-            $_SESSION["user"] = $user;
-      
-        }else{
-           echo getProducts($username);
-        }
 
-        ?>
+            ?>
+            </section>
         </section>
+        <div class="move-buttons">
+            <input class="move" id="right" type="button" value="<">
+            <div class="check-move">
+               
+            </div>
+            <input class="move" id="left" type="button" value=">">
+        </div>
     </main>
     <script type="module" src="./dist/home.js"></script>
 </body>

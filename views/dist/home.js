@@ -1,5 +1,5 @@
-const shopCartBtn = document.querySelector("#shopCart"), shopCart = document.querySelector(".shop-cart-container"), closeCart = document.querySelector("#arrow-left"), add = document.querySelectorAll(".add"), item = document.querySelector(".item"), carrousel = document.querySelector(".img-carrousel"), covers = document.querySelectorAll(".i");
-let actionBtns = null;
+const shopCartBtn = document.querySelector("#shopCart"), shopCart = document.querySelector(".shop-cart-container"), closeCart = document.querySelector("#arrow-left"), add = document.querySelectorAll(".add"), item = document.querySelector(".item"), carrousel = document.querySelector(".img-carrousel"), covers = document.querySelectorAll(".i"), card = document.querySelectorAll(".card"), moveBtns = document.querySelectorAll(".move"), checkMove = document.querySelector(".check-move");
+let countCard = 0;
 window.addEventListener("load", () => {
     let c = 0;
     if (localStorage.getItem("cart")) {
@@ -15,10 +15,54 @@ window.addEventListener("load", () => {
             carrousel.style.transition = "2s ease";
         }
     }, 1 * 100 * 30);
+    for (let i = 0; i < card.length; i++) {
+        checkMove.innerHTML += ` <div id='${i}' class='check'></div>`;
+    }
+    const buttons = document.querySelectorAll(".check");
+    buttons.forEach((e) => {
+        e.addEventListener('click', () => {
+            document.querySelectorAll(".check").forEach((ele) => {
+                ele.style.background = "none";
+            });
+            e.style.backgroundColor = "#330f3c";
+            e.style.transition = "0.2s";
+            countCard = Number(e.id) * -20;
+            card.forEach((ele) => {
+                ele.style.transform = `translate(${countCard}rem)`;
+                ele.style.transition = "2s ease";
+            });
+        });
+    });
+});
+moveBtns.forEach((e) => {
+    e.addEventListener("click", () => {
+        if (e.id === "left") {
+            countCard -= 20;
+            card.forEach((ele) => {
+                ele.style.transform = `translate(${countCard}rem)`;
+                ele.style.transition = "2s ease";
+            });
+        }
+        else if (e.id === "right") {
+            if (countCard !== 0) {
+                countCard += 20;
+                card.forEach((ele) => {
+                    ele.style.transform = `translate(${countCard}rem)`;
+                    ele.style.transition = "2s ease";
+                });
+            }
+        }
+        if (countCard === (card.length * -20)) {
+            countCard = 0;
+            card.forEach((ele) => {
+                ele.style.transform = `translate(0%)`;
+                ele.style.transition = "2s ease";
+            });
+        }
+    });
 });
 shopCartBtn?.addEventListener('click', () => {
-    actionBtns = document.querySelectorAll(".action");
-    addAndDecrease(actionBtns);
+    updateCart(item);
     shopCart?.classList.toggle("show");
 });
 closeCart?.addEventListener('click', () => {
@@ -67,14 +111,25 @@ function updateCart(div) {
             <div class='item-show'>
                 <img class="shop-cart-img"  src="${e.cover}" alt="">
                 <div class="info">
-                    <p id="tittle${count}" class="game-tittle-cart">${e.tittle}</p>
+                    <p id="tittleb${count}" class="game-tittle-cart">${e.tittle}</p>
                     <div class="action-buttons">
-                        <input id="${count}" class="action m" type="button" value="+">
+                        <input id="b${count}" class="action m" type="button" value="+">
                         <input class="action" type="button" value="${e.qtd}">
-                        <input id="${count}" class="action l" type="button" value="-">
+                        <input id="b${count}" class="action l" type="button" value="-">
                     </div>
                 </div>
             </div>`;
+            const actionBtns = document.querySelectorAll(".action");
+            actionBtns.forEach((e) => {
+                const qtd = e.parentElement?.childNodes[3];
+                const name = document.querySelector(("#tittle" + e.id));
+                e.addEventListener('click', () => {
+                    verify(e, qtd, name);
+                    if (qtd.value === "0") {
+                        e.parentElement.parentElement.parentElement.remove();
+                    }
+                });
+            });
             count++;
         }
     });
@@ -91,6 +146,10 @@ function updateLs(productName, button) {
             else {
                 e.value -= e.unityValue;
                 e.qtd -= 1;
+                if (e.qtd === 0) {
+                    arr = arr.filter(ele => ele.qtd !== 0);
+                    arr.filter(ele => ele.qtd !== 0);
+                }
             }
         }
         const arr2 = arr.filter((e) => e.qtd !== 0);
@@ -98,22 +157,16 @@ function updateLs(productName, button) {
     });
     localStorage.setItem("cart", JSON.stringify(arr));
 }
-function addAndDecrease(actionBtns) {
-    actionBtns.forEach((e) => {
-        const qtd = e.parentElement?.childNodes[3];
-        const name = document.querySelector(("#tittle" + e.id));
-        e.addEventListener('click', () => {
-            if (e.classList.contains("m")) {
-                qtd.value = Number(qtd.value) + 1;
-                updateLs(name.innerHTML, e);
-            }
-            else if (e.classList.contains("l")) {
-                if (qtd.value != 0) {
-                    qtd.value = Number(qtd.value) - 1;
-                    updateLs(name.innerHTML, e);
-                }
-            }
-        });
-    });
+function verify(e, qtd, name) {
+    if (e.classList.contains("m")) {
+        qtd.value = Number(qtd.value) + 1;
+        updateLs(name.innerHTML, e);
+    }
+    else if (e.classList.contains("l")) {
+        if (qtd.value !== 0) {
+            qtd.value = Number(qtd.value) - 1;
+            updateLs(name.innerHTML, e);
+        }
+    }
 }
 export {};

@@ -1,8 +1,9 @@
-const left = document.querySelector(".left"), middle = document.querySelector(".middle"), right = document.querySelector(".right"), itensContainer = document.querySelector(".items-cart-container"), cardLabels = document.querySelectorAll(".payment-methods > label"), totalValue = document.querySelector("#value"), pay = document.querySelector(".pay > input[type='submit']");
+const left = document.querySelector(".left"), middle = document.querySelector(".middle"), right = document.querySelector(".right"), itensContainer = document.querySelector(".items-cart-container"), cardLabels = document.querySelectorAll(".payment-methods > label"), totalValue = document.querySelector("#value"), pay = document.querySelector(".pay > input[type='submit']"), modal = document.querySelector(".modal-container");
 window.addEventListener("load", () => {
     const url = new URLSearchParams(window.location.href);
     if (url.get("s")) {
         localStorage.removeItem("cart");
+        modal?.classList.add("show");
     }
     else {
         let arrProducts = [];
