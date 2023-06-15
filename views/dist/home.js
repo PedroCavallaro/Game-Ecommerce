@@ -62,6 +62,7 @@ moveBtns.forEach((e) => {
     });
 });
 shopCartBtn?.addEventListener('click', () => {
+    updateCart(item);
     shopCart?.classList.toggle("show");
 });
 closeCart?.addEventListener('click', () => {
@@ -118,7 +119,7 @@ function updateCart(div) {
                     </div>
                 </div>
             </div>`;
-            const actionBtns = document.querySelectorAll("#b" + count);
+            const actionBtns = document.querySelectorAll(".action");
             actionBtns.forEach((e) => {
                 const qtd = e.parentElement?.childNodes[3];
                 const name = document.querySelector(("#tittle" + e.id));
@@ -142,6 +143,10 @@ function updateLs(productName, button) {
             else {
                 e.value -= e.unityValue;
                 e.qtd -= 1;
+                if (e.qtd === 0) {
+                    arr = arr.filter(ele => ele.qtd !== 0);
+                    arr.filter(ele => ele.qtd !== 0);
+                }
             }
         }
         const arr2 = arr.filter((e) => e.qtd !== 0);
@@ -149,31 +154,13 @@ function updateLs(productName, button) {
     });
     localStorage.setItem("cart", JSON.stringify(arr));
 }
-function addAndDecrease(actionBtns) {
-    actionBtns.forEach((e) => {
-        const qtd = e.parentElement?.childNodes[3];
-        const name = document.querySelector(("#tittle" + e.id));
-        e.addEventListener('click', () => {
-            if (e.classList.contains("m")) {
-                qtd.value = Number(qtd.value) + 1;
-                updateLs(name.innerHTML, e);
-            }
-            else if (e.classList.contains("l")) {
-                if (qtd.value != 0) {
-                    qtd.value = Number(qtd.value) - 1;
-                    updateLs(name.innerHTML, e);
-                }
-            }
-        });
-    });
-}
 function verify(e, qtd, name) {
     if (e.classList.contains("m")) {
         qtd.value = Number(qtd.value) + 1;
         updateLs(name.innerHTML, e);
     }
     else if (e.classList.contains("l")) {
-        if (qtd.value != 0) {
+        if (qtd.value !== 0) {
             qtd.value = Number(qtd.value) - 1;
             updateLs(name.innerHTML, e);
         }

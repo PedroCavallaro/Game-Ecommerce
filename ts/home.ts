@@ -9,7 +9,8 @@ const shopCartBtn: HTMLImageElement | null = document.querySelector("#shopCart")
     card:NodeListOf<Element> = document.querySelectorAll(".card"),
     moveBtns: NodeListOf<HTMLInputElement> = document.querySelectorAll(".move"),
     checkMove: HTMLDivElement | null = document.querySelector(".check-move")
-   
+
+
     let countCard  = 0
 export interface Product{
     cover: string,
@@ -92,7 +93,8 @@ moveBtns.forEach((e)=>{
         }
     })
 })
-shopCartBtn?.addEventListener('click', ()=>{    
+shopCartBtn?.addEventListener('click', ()=>{
+    updateCart(item);
     shopCart?.classList.toggle("show")
     
 })
@@ -160,13 +162,12 @@ function updateCart(div: HTMLDivElement | null){
                     </div>
                 </div>
             </div>`
-            const actionBtns = document.querySelectorAll("#b"+count)
+            const actionBtns = document.querySelectorAll(".action")
             actionBtns.forEach((e: any)=>{
                 const qtd:any = e.parentElement?.childNodes[3]
                 const name = document.querySelector(("#tittle" + e.id)) 
         
                 e.addEventListener('click', ()=>{
-        
                    verify(e,qtd,name)
                     
                 })
@@ -188,6 +189,10 @@ function updateLs(productName: string, button:HTMLInputElement){
             }else{
                 e.value -= e.unityValue
                 e.qtd -= 1
+                if(e.qtd === 0){
+                    arr = arr.filter(ele => ele.qtd !== 0)
+                    arr.filter(ele => ele.qtd !== 0)
+                }
             }
             
         }
@@ -197,33 +202,13 @@ function updateLs(productName: string, button:HTMLInputElement){
 
     localStorage.setItem("cart", JSON.stringify(arr))
 }
-function addAndDecrease(actionBtns:any[]){    
-    actionBtns.forEach((e)=>{
-        const qtd:any = e.parentElement?.childNodes[3]
-        const name = document.querySelector(("#tittle" + e.id)) 
-        e.addEventListener('click', ()=>{
-            
-            if(e.classList.contains("m")){
-                qtd.value = Number(qtd.value) + 1 
-                updateLs(name!.innerHTML, e)
-            }
-            else if(e.classList.contains("l")){
-                if(qtd.value != 0){
-                    qtd.value = Number(qtd.value) - 1 
-                    updateLs(name!.innerHTML, e)  
-                }
-            }
-        })
-    })
-   
-}
-function verify(e:any,qtd:any,name:any){
+function verify(e:any, qtd:any, name:any){
     if(e.classList.contains("m")){
         qtd.value = Number(qtd.value) + 1 
         updateLs(name!.innerHTML, e)
     }
     else if(e.classList.contains("l")){
-        if(qtd.value != 0){
+        if(qtd.value !== 0){
             qtd.value = Number(qtd.value) - 1 
             updateLs(name!.innerHTML, e)  
         }
