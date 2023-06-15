@@ -11,6 +11,22 @@ form?.addEventListener("submit", (ele) => {
         }
     });
 });
+cpf?.addEventListener("keydown", (e) => {
+    if (isNaN(Number(e.key)) && e.key !== "Backspace") {
+        e.preventDefault();
+    }
+    if (cpf.value.length === 11 && e.key !== "Backspace") {
+        e.preventDefault();
+    }
+});
+cepInput?.addEventListener("keydown", (e) => {
+    if (isNaN(Number(e.key)) && e.key !== "Backspace") {
+        e.preventDefault();
+    }
+    if (cepInput.value.length === 8 && e.key !== "Backspace") {
+        e.preventDefault();
+    }
+});
 cepInput?.addEventListener('blur', async () => {
     try {
         const response = await fetch(`https://viacep.com.br/ws/${cepInput.value}/json/`)

@@ -2,7 +2,9 @@
 include_once "./src/user.php";
 $username = $_GET["username"];
 session_start();
-
+if(!isset($username)){
+    header("location:../login.php");
+}
 $id = $_SESSION["user"];
 ?>
 <!DOCTYPE html>

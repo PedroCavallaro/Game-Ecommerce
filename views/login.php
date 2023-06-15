@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <label for="cpf">CPF:</label><br>
-                    <input type="text" id="cpf" name="cpf">
+                    <input type="text" id="cpf" maxlength="11" name="cpf">
                     <span id="err"></span>
                     <p>
                         <p>Não tem uma conta? <a id="register" href="./register.php">Cadastre-se</a></p>
@@ -31,5 +31,6 @@
             <div></div>
         </section>
     </main>
+    <script src="./dist/login.js"></script>
 </body>
 </html>

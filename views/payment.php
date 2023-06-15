@@ -1,7 +1,9 @@
 <?php
 include_once "../src/Product/products.php";
 $username = $_GET["username"];
-
+if(!isset($username)){
+    header("location:./login.php");
+}
 session_start();
 $id = $_SESSION["user"]
 
@@ -18,6 +20,12 @@ $id = $_SESSION["user"]
     <title>Pagamento</title>
 </head>
 <body>
+<div class="modal-container">
+        <div class="modal">
+            <h3>Compra aprovada com sucesso</h3>
+            <p>Suas compras podem ser visualizadas na <a href="./User/user.php?username=<?=$username?>">página de usuário</a></p>
+        </div>
+    </div>
 <header>
         <a href="./home.php?username=<?=$username?>">
             <img  src="../assets/icon_logo.png" alt="">
@@ -40,6 +48,7 @@ $id = $_SESSION["user"]
             </div>
         </div>
     </header>
+    
     <form action="../src/finish.php?username=<?=$username?>&id=<?=$id?>" method="POST">
         <section class="left">
             <div class="total-price">

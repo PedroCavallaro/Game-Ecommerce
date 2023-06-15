@@ -5,7 +5,8 @@ const left: HTMLDivElement | null = document.querySelector(".left"),
      itensContainer: HTMLDivElement | null = document.querySelector(".items-cart-container"),
      cardLabels: NodeListOf<HTMLLabelElement> = document.querySelectorAll(".payment-methods > label"),
      totalValue: HTMLHeadingElement | null = document.querySelector("#value"),
-     pay: HTMLInputElement | null = document.querySelector(".pay > input[type='submit']")
+     pay: HTMLInputElement | null = document.querySelector(".pay > input[type='submit']"),
+     modal:HTMLDivElement | null = document.querySelector(".modal-container")
 
 
 window.addEventListener("load", ()=>{
@@ -13,6 +14,7 @@ window.addEventListener("load", ()=>{
 
     if(url.get("s")){
         localStorage.removeItem("cart")
+        modal?.classList.add("show")
     }else{
         
     let arrProducts:Product[] = [] 

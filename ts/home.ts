@@ -169,6 +169,9 @@ function updateCart(div: HTMLDivElement | null){
         
                 e.addEventListener('click', ()=>{
                    verify(e,qtd,name)
+                   if(qtd.value === "0"){
+                        e.parentElement.parentElement.parentElement.remove()
+                   }
                     
                 })
             })
